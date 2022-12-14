@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="assets/img/isotipo_finneg.png">
+  <title>Crisalis</title>
+  <style th:replace="@{parcials/admin_styles}"></style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" th:src="@{assets/img/finneganslogo.png}" alt="FinnegansLogo" height="40" width="%70">
+  </div>
+
+  <div th:replace="@{parcials/admin_navbar}"></div>
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img th:src="@{assets/AdminLTE/dist/img/isotipo_finneg.png}" alt="Finnegans Logo" class="brand-image pt-2 " style="opacity: .8">
+      <span class="brand-text font-weight-light justify-content-center">Crisalis</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div th:replace="@{parcials/admin_sidebar}"></div>
+  </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Content</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+              <li class="breadcrumb-item active">Content</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+  <!-- Control Sidebar -->
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark sidebar-dark-primary">
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column">
+        <li class="nav-item">
+          <a href="#" class="nav-link text-white">
+            <i class="fas fa-sign-out-alt nav-icon"></i>  
+            <p>Cerrar Sesion</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link text-white">
+            <i class="fas fa-cog nav-icon"></i>  
+            <p>Configuracion</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  <!-- /.control-sidebar -->
+  </div>
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2021-2023 <a href="https://finneg.com">Finnegans</a>.</strong>
+    Todos los derechos reservados.
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script th:src="@{assets/AdminLTE/plugins/jquery/jquery.min.js}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script th:src="@{assets/AdminLTE/plugins/jquery-ui/jquery-ui.min.js}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script th:src="@{assets/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- ChartJS -->
+<!-- <script th:src="@{assets/AdminLTE/plugins/chart.js/Chart.min.js}"></script> -->
+<!-- Sparkline -->
+<script th:src="@{assets/AdminLTE/plugins/sparklines/sparkline.js}"></script>
+<!-- JQVMap -->
+<!-- <script th:src="@{assets/AdminLTE/plugins/jqvmap/jquery.vmap.min.js}"></script> -->
+<!-- <script th:src="@{assets/AdminLTE/plugins/jqvmap/maps/jquery.vmap.usa.js}"></script> -->
+<!-- jQuery Knob Chart -->
+<script th:src="@{assets/AdminLTE/plugins/jquery-knob/jquery.knob.min.js}"></script>
+<!-- daterangepicker -->
+<!-- <script th:src="@{assets/AdminLTE/plugins/moment/moment.min.js}"></script>
+<script th:src="@{assets/AdminLTE/plugins/daterangepicker/daterangepicker.js}"></script> -->
+<!-- Tempusdominus Bootstrap 4 -->
+<!-- <script th:src="@{assets/AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js}"></script>
+ -->
+ <!-- Summernote -->
+<!-- <script th:src="@{assets/AdminLTE/plugins/summernote/summernote-bs4.min.js}"></script> -->
+<!-- overlayScrollbars -->
+<script th:src="@{assets/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{assets/AdminLTE/dist/js/adminlte.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<!-- <script th:src="@{assets/AdminLTE/dist/js/demo.js}"></script> -->
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<!-- <script th:src="@{assets/AdminLTE/dist/js/pages/dashboard.js}"></script> -->
+</body>
+</html>
