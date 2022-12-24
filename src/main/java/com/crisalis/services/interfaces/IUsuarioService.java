@@ -1,4 +1,5 @@
-package com.crisalis.services;
+package com.crisalis.services.interfaces;
+
 import java.util.ArrayList;
 
 import com.crisalis.models.Usuario;

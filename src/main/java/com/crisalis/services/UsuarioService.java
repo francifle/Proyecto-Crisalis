@@ -9,9 +9,10 @@ import com.crisalis.exception.custom.EmptyElementException;
 import com.crisalis.models.Usuario;
 import com.crisalis.models.dto.UserDTO;
 import com.crisalis.repositories.UsuarioRepository;
+import com.crisalis.services.interfaces.IUsuarioService;
 
 @Service
-public class UsuarioService {
+public class UsuarioService{
 
    private final UsuarioRepository usuarioRepository;
    
@@ -42,6 +43,8 @@ public class UsuarioService {
 	return Boolean.TRUE;
 	   
    	}
+
+}
    
-   }
+   
    

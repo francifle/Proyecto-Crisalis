@@ -4,25 +4,18 @@ import com.crisalis.models.dto.UserDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Entity
 @Builder
 @AllArgsConstructor
+@Entity(name = "Usuario")
 @Table(name="Usuario")
-public class Usuario {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Integer id;
-    
+public class Usuario extends GenericModel{
+	    
     @Column(name="username", nullable=false)
 	private String mail;
     @Column(name="pass", nullable=false)
@@ -33,12 +26,6 @@ public class Usuario {
     public Usuario () {
 	}
     
-	public Usuario(String username, String pass, String nombre) {
-		super();
-		this.mail = username;
-		this.pass = pass;
-		this.nombre = nombre;
-	}
 	
 	public Usuario(UserDTO userDTO) {
 		super();
@@ -47,12 +34,6 @@ public class Usuario {
 		this.nombre = userDTO.getNombre();
 	}
 	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	public String getMail() {
 		return mail;
 	}
@@ -74,7 +55,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", username=" + mail + ", pass=" + pass + ", nombre=" + nombre + "]";
+		return "Usuario [id=" + getId() + ", username=" + mail + ", pass=" + pass + ", nombre=" + nombre + "]";
 	}
 
 	

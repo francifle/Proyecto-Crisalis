@@ -19,7 +19,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="#" class="brand-link">
       <img th:src="@{../assets/AdminLTE/dist/img/isotipo_finneg.png}" alt="Finnegans Logo" class="brand-image pt-2 " style="opacity: .8">
       <span class="brand-text font-weight-light justify-content-center">Crisalis</span>
     </a>
@@ -31,24 +31,26 @@
     <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Lista de usuarios</h1>
-            <div th:replace="@{parcials/table_user}"></div>
-        </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Content</li>
-            </ol>
+            <h1 class="m-0">LISTA DE SERVICIOS</h1>
           </div><!-- /.col -->
+          <div class="btn-group align-items-end ml-auto mr-5 pr-2" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary">Añadir Servicios</button>
+          </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
-    </div>
+    </section>
     <!-- /.content-header -->
-
+    <section class="content">
+      <div class="row">
+        <div th:replace="@{parcials/table_servicio}"></div>
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
     <!-- Control Sidebar -->
     <div th:replace="@{parcials/admin_controlsidebar}"></div>
     <!-- /.control-sidebar -->

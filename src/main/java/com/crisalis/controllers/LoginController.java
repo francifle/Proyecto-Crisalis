@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.crisalis.constants.BasicsConstants;
 import com.crisalis.models.Usuario;
 import com.crisalis.repositories.UsuarioRepository;
 

@@ -37,9 +37,5 @@ public class UsuarioController {
 		Usuario newUser = usuarioService.saveUser(userDTO);
 		return "index";
 	}
-	@GetMapping(value = "List")
-		public String list() {
-			return "ListUser";
-		}
 	
 }
