@@ -1,5 +1,7 @@
 package com.crisalis.models;
 
+import java.util.Objects;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,5 +21,24 @@ public class GenericModel {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GenericModel other = (GenericModel) obj;
+		return Objects.equals(id, other.id);
+	}
+	
+	
 	
 }

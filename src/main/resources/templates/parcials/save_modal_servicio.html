@@ -1,0 +1,38 @@
+<div id="addEmployeeModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form action="/servicio/save" method="POST">
+				<div class="modal-header">
+					<h4 class="modal-title">Agregar Servicio</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>Nombre</label> <input name="servicio" type="text"
+							class="form-control" required placeholder="Ej: Itel">
+					</div>
+					<div class="form-group">
+						<label>Fecha</label> <input name="fecha" type="date"
+							class="form-control"  required placeholder="DD/MM/AAAA">
+					</div>
+					<div class="form-group">
+						<label>Precio</label> <input name="precio" type="text"
+							id="intTextBox" class="form-control" required
+							placeholder="$10.000">
+					</div>
+					<div class="form-group">
+						<label>Impuestos</label> 
+						<select class="form-control select2 select2-hidden-accessible my-select" name="select" multiple="" style="width: 100%;" tabindex="-1" aria-hidden="true"> </select>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal"
+						value="Cancelar "> <input type="submit"
+						class="btn btn-success" value="Agregar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+	

@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="assets/img/isotipo_finneg.png">
   <title>Crisalis</title>
   <style th:replace="@{parcials/admin_styles}"></style>
+  <link rel="stylesheet" th:href="@{../assets/css/crud_table.css}">
+  <link rel="stylesheet" th:href="@{../assets/css/select.css}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" th:href="@{../assets/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+  <!--<link rel="stylesheet" th:href="@{../assets/bootstrap-datepicker/css/bootstrap-datepicker.css}">-->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -31,23 +37,10 @@
     <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">LISTA DE SERVICIOS</h1>
-          </div><!-- /.col -->
-          <div class="btn-group align-items-end ml-auto mr-5 pr-2" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary">Añadir Servicios</button>
-          </div>
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content-header -->
     <section class="content">
-      <div class="row">
-        <div th:replace="@{parcials/table_servicio}"></div>
-      </div>
+        <div class="row">
+          <div th:replace="@{parcials/table_servicio}"></div>
+        </div>
       <!-- /.row -->
     </section>
     <!-- /.content -->
@@ -61,5 +54,15 @@
 <!-- ./wrapper -->
 <!-- Scripts -->
     <div th:replace="@{parcials/admin_scripts}"></div>
+    <script defer th:src="@{../assets/js/crud_table.js}"></script>
+    <script defer th:src="@{../assets/AdminLTE/plugins/datatables/jquery.dataTables.js}"></script>
+    <script defer th:src="@{../assets/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+    <script defer th:src="@{../assets/js/datatable.js}"></script>
+    <!--<script defer th:src="@{../assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+    <script defer th:src="@{../assets/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js}"></script>
+    <script defer th:src="@{../assets/js/datepicker.js}"></script>-->
+    <script defer th:src="@{../assets/js/onlynumber.js}"></script>
+    <script defer th:src="@{../assets/js/select_impuestos.js}"></script>
+    
 </body>
 </html>

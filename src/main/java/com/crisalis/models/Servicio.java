@@ -2,8 +2,12 @@ package com.crisalis.models;
 
 import com.crisalis.constants.BasicsConstants;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
@@ -11,18 +15,23 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity(name="Servicio")
 @Table(name="Servicio")
 public class Servicio extends GenericModel {
-
+	
+	@Column(name="meses", nullable=true)
 	private Integer meses;
 	
+	@Column(name="cargo_mensual", nullable=true)
+	private Double cargoMensual;
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId
 	private Pedido pedido;
 
 	public Pedido getPedido() {
@@ -41,8 +50,16 @@ public class Servicio extends GenericModel {
 		this.meses = meses;
 	}
 	
+	public Double getCargoMensual() {
+		return cargoMensual;
+	}
+
+	public void setCargoMensual(Double cargoMensual) {
+		this.cargoMensual = cargoMensual;
+	}
+
 	public Double getCostoMensual() {
-		return getPedido().getPrecioTotal() * BasicsConstants.CARGO_MENSUAL * getMeses();
+		return getPedido().getPrecioTotal() * getCargoMensual() * getMeses();
 	}
 	
 	public Double getPrecioTotalServicio() {

@@ -1,5 +1,7 @@
 package com.crisalis.models;
 
+import java.util.Objects;
+
 import com.crisalis.models.dto.UserDTO;
 
 import jakarta.persistence.Column;
@@ -8,10 +10,12 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "Usuario")
 @Table(name="Usuario")
 public class Usuario extends GenericModel{
@@ -22,11 +26,7 @@ public class Usuario extends GenericModel{
 	private String pass;
     @Column(name="nombre", nullable=false)
 	private String nombre;
-    
-    public Usuario () {
-	}
-    
-	
+
 	public Usuario(UserDTO userDTO) {
 		super();
 		this.mail = userDTO.getUsername();
@@ -34,6 +34,10 @@ public class Usuario extends GenericModel{
 		this.nombre = userDTO.getNombre();
 	}
 	
+	public Usuario() {
+		super();
+	}
+
 	public String getMail() {
 		return mail;
 	}
@@ -51,6 +55,28 @@ public class Usuario extends GenericModel{
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}	
+
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(mail, nombre, pass);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (Objects.equals(mail, other.mail) && Objects.equals(pass, other.pass))
+			return true;
+		return !super.equals(obj);
 	}
 
 	@Override
@@ -58,6 +84,4 @@ public class Usuario extends GenericModel{
 		return "Usuario [id=" + getId() + ", username=" + mail + ", pass=" + pass + ", nombre=" + nombre + "]";
 	}
 
-	
-    
 }

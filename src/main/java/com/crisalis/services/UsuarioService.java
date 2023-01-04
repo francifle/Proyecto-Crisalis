@@ -1,7 +1,5 @@
 package com.crisalis.services;
 
-import java.util.ArrayList;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -9,16 +7,16 @@ import com.crisalis.exception.custom.EmptyElementException;
 import com.crisalis.models.Usuario;
 import com.crisalis.models.dto.UserDTO;
 import com.crisalis.repositories.UsuarioRepository;
-import com.crisalis.services.interfaces.IUsuarioService;
 
 @Service
 public class UsuarioService{
 
+	//Instanciar
    private final UsuarioRepository usuarioRepository;
    
-   public UsuarioService(UsuarioRepository usuarioRepository) {
-  		this.usuarioRepository = usuarioRepository;
-   	}
+   public UsuarioService(UsuarioRepository usuarioRepository, PedidoService pedidoService) {
+ 		this.usuarioRepository = usuarioRepository;
+  	}
    
    public Usuario saveUser(UserDTO userDTO) {
 	   if(checkUserDTO(userDTO)) {
@@ -38,7 +36,7 @@ public class UsuarioService{
 		   throw new EmptyElementException("Password is empty");
   		}
 	   if(StringUtils.isAllEmpty(userDTO.getUsername())) {
-		   throw new EmptyElementException("Usernaname is empty");  
+		   throw new EmptyElementException("Username is empty");  
   		}
 	return Boolean.TRUE;
 	   

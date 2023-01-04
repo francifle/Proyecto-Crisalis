@@ -17,5 +17,9 @@ public class BasicsConstants {
 	
 	//El tope máximo de descuentos por pedido no puede superar los 2500 pesos.//
 	public static final Double DESC_MAXIMO = 2500.0;
+	
+	public static final Integer TIPO_PRODUCTO = 1;
+	
+	public static final Integer TIPO_SERVICIO = 2;
 
 }

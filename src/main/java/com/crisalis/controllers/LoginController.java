@@ -53,9 +53,12 @@ public class LoginController {
     public String home(HttpServletRequest req, HttpServletResponse resp){
 		String mail = req.getParameter("mail");
 		String pass = req.getParameter("pass");
+		Usuario user = new Usuario();
+		user.setMail(mail);
+		user.setPass(pass);
     	ArrayList<Usuario> list = (ArrayList<Usuario>) usuarioRepository.findAll();
         for(int i=0;i<list.size();i++) {
-        	if(mail.equals(list.get(i).getMail()) && pass.equals(list.get(i).getPass()))
+        	if(user.equals(list.get(i)))
             	return "home";
         }
         
