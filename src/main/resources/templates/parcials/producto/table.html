@@ -4,13 +4,13 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<h2>
-						Lista de <b>Servicios</b>
+						Lista de <b>Productos</b>
 					</h2>
 				</div>
 				<div class="col-sm-6">
 					<a href="#addEmployeeModal" class="btn btn-success"
 						data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar
-							servicio</span></a> <a href="#deleteEmployeeModalMultiple"
+							producto</span></a> <a href="#deleteEmployeeModalMultiple"
 						class="btn btn-danger" data-toggle="modal"><i
 						class="material-icons">&#xE15C;</i> <span>Borrar</span></a>
 				</div>
@@ -23,38 +23,41 @@
 							type="checkbox" id="selectAll"> <label for="selectAll"></label>
 					</span></th>
 					<th>Fecha</th>
-					<th>Servicio</th>
-					<th>Costo Mensual</th>
-					<th>Impuestos</th>
+					<th>Producto</th>
+					<th>Precio</th>
+					<th>IVA</th>
+					<th>IIBB</th>
 					<th>Total</th>
 					<th>Accion</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="servicio: ${servicios}">
-					<td><span class="custom-checkbox"><input
+				<tr th:each="producto: ${productos}">
+					<td><span class="custom-checkbox"> <input
 							type="checkbox" id="checkbox1" name="options[]" value="1">
-							<label for="checkbox1"></label> </span></td>
-					<td th:text="${servicio.getPedido().getFecha()}"></td>
-					<td th:text="${servicio.getPedido().getNombre()}"></td>
-					<td th:text="${servicio.getPedido().getPrecio()}"></td>
-					<td th:text="${servicio.getPedido().getPrecioImpuestos()}"></td>
-					<td th:text="${servicio.getPedido().getPrecioTotal()}"></td>
-					<td><a th:href="@{#editEmployeeModal}+${servicio.getId()}"
+							<label for="checkbox1"></label>
+					</span></td>
+					<td th:text="${producto.getPedido().getFecha()}"></td>
+					<td th:text="${producto.getPedido().getNombre()}"></td>
+					<td th:text="${producto.getPedido().getPrecio()}"></td>
+					<td th:text="${producto.getPedido().getPrecioIVA()}"></td>
+					<td th:text="${producto.getPedido().getPrecioIIBB()}"></td>
+					<td th:text="${producto.getPedido().getPrecioTotal()}"></td>
+					<td><a th:href="@{#editEmployeeModal}+${producto.getId()}"
 						class="edit" data-toggle="modal"><i class="material-icons"
 							 title="Edit">&#xE254;</i></a> <a
-						th:href="@{#deleteEmployeeModal}+${servicio.getId()}"
+						th:href="@{#deleteEmployeeModal}+${producto.getId()}"
 						class="delete" data-toggle="modal"><i class="material-icons"
 							 title="Delete">&#xE872;</i></a></td>
 					<!-- Edit Modal HTML -->
-					<div th:replace="@{parcials/edit_modal_servicio}"></div>
+					<div th:replace="@{parcials/producto/edit_modal}"></div>
 					<!-- Delete Modal HTML -->
-					<div th:replace="@{parcials/delete_modal_servicio}"></div>
+					<div th:replace="@{parcials/producto/delete_modal}"></div>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	<div th:replace="@{parcials/delete_multiple_servicio}"></div>
+	<div th:replace="@{parcials/producto/delete_multiple}"></div>
 	<!-- Edit Modal HTML -->
-	<div th:replace="@{parcials/save_modal_servicio}"></div>
+	<div th:replace="@{parcials/producto/save_modal}"></div>
 </div>

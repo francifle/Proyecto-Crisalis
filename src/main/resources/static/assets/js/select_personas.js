@@ -1,16 +1,16 @@
 $(document).ready(function () {
  	$('.my-select').select2({
-		placeholder:'Agregar impuestos',
+		placeholder:'Agregar personas',
 		multiple:true,
 		ajax:{
 			type:'GET',
-			url:'../../ListRest/impuestos',
+			url:'../../ListRest/personas',
 			dataType:'json',
 			processResults: function(data){
 				return{
 					results: $.map(data, function(item){
 						return {
-							text: item.nombre,
+							text: item.nombreCompleto,
 							id: item.id
 						}
 					})

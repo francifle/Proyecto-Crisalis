@@ -34,7 +34,7 @@
 							<label for="checkbox1"></label>
 					</span></td>
 					<td th:text="${persona.getNombreCompleto()}"></td>
-					<td th:text="${persona.getDni()}"></td>
+					<td th:text="${persona.getDni()}" class="dni"></td>
 					<td><a th:href="@{#editEmployeeModal}+${persona.getId()}"
 						class="edit" data-toggle="modal"><i class="material-icons"
 							 title="Edit">&#xE254;</i></a> <a
@@ -42,14 +42,14 @@
 						class="delete" data-toggle="modal"><i class="material-icons"
 							 title="Delete">&#xE872;</i></a></td>
 					<!-- Edit Modal HTML -->
-					<div th:replace="@{parcials/edit_modal_persona}"></div>
+					<div th:replace="@{parcials/persona/edit_modal}"></div>
 					<!-- Delete Modal HTML -->
-					<div th:replace="@{parcials/delete_modal_persona}"></div>
+					<div th:replace="@{parcials/persona/delete_modal}"></div>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	<div th:replace="@{parcials/delete_multiple_persona}"></div>
+	<div th:replace="@{parcials/persona/delete_multiple}"></div>
 	<!-- Edit Modal HTML -->
-	<div th:replace="@{parcials/save_modal_persona}"></div>
+	<div th:replace="@{parcials/persona/save_modal}"></div>
 </div>

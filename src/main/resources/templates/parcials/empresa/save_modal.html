@@ -1,0 +1,39 @@
+<div id="addEmployeeModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form action="/empresa/save" method="POST">
+				<div class="modal-header">
+					<h4 class="modal-title">Agregar Empresa</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>Razon Social</label> <input name="razonsocial" type="text"
+							class="form-control" required placeholder="Ej: Arroz Dos Hermanos">
+					</div>
+					<div class="form-group">
+						<label>Cuit</label> <input name="cuit" type="text"
+							id="intTextBox" class="form-control" required
+							placeholder="Ej: 20-12345678-7" maxlength="11">
+					</div>
+					<div class="form-group">
+						<label>Inicio de Actividad</label> <input name="fecha" type="date"
+							id="intTextBox" class="form-control" required
+							placeholder="DD/MM/AAAA">
+					</div>
+					<div class="form-group">
+						<label>Integrantes</label> 
+						<select class="form-control select2 select2-hidden-accessible my-select" name="select" multiple="" style="width: 100%;" tabindex="-1" aria-hidden="true"> </select>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal"
+						value="Cancelar "> <input type="submit"
+						class="btn btn-success" value="Agregar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+	

@@ -45,4 +45,13 @@ public class Persona extends GenericModel {
 	public String getNombreCompleto() {
 		return getNombre() + " " + getApellido();
 	}
+	
+	public String getNombreFisico() {
+		return getNombreCompleto() + " - DNI: " + getDniFormateado();
+	}
+	
+	public String getDniFormateado() {
+		return getDni().substring(0,2) + "." + getDni().substring(2,5) + "." + getDni().substring(5,8);
+	}
+	
 }

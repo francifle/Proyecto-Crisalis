@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.crisalis.models.Empresa;
 import com.crisalis.models.Persona;
 import com.crisalis.models.Producto;
 import com.crisalis.models.Servicio;
+import com.crisalis.services.EmpresaService;
 import com.crisalis.services.PersonaService;
 import com.crisalis.services.ProductoService;
 import com.crisalis.services.ServicioService;
@@ -25,11 +27,15 @@ public class ListController {
 	private final ServicioService servicioService;
 	@Autowired
 	private final PersonaService personaService;
+	@Autowired
+	private final EmpresaService empresaService;
+
 	
-	public ListController(ProductoService productoService, ServicioService servicioService, PersonaService personaService) {
+	public ListController(ProductoService productoService, ServicioService servicioService, PersonaService personaService, EmpresaService empresaService) {
 		this.productoService = productoService;
 		this.servicioService = servicioService;
 		this.personaService = personaService;
+		this.empresaService = empresaService;
 	}
 	
 	
@@ -51,8 +57,11 @@ public class ListController {
 	}	
 	
 	@GetMapping(value = "Empresas")
-	public String listEmpresa() {
-		return "ListEmpresas";
+	public ModelAndView listEmpresa() {
+		ModelAndView mav = new ModelAndView("ListEmpresas");
+		List<Empresa> list = empresaService.getAllEmpresas();
+		mav.addObject("empresas", list);
+		return mav;
 	}
 	
 	@GetMapping(value = "Personas")

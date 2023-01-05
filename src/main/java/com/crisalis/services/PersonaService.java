@@ -1,6 +1,7 @@
 package com.crisalis.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -37,4 +38,8 @@ public class PersonaService {
      	this.personaRepository.delete(findPersonaByID(id));
      
      }
+
+	public List<Persona> getAllPersonasByNombre(String term) {
+		return this.personaRepository.getAllPersonasByNombre(term);
+	}
 }
