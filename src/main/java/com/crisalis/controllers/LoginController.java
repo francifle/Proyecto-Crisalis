@@ -57,9 +57,13 @@ public class LoginController {
 		user.setMail(mail);
 		user.setPass(pass);
     	ArrayList<Usuario> list = (ArrayList<Usuario>) usuarioRepository.findAll();
+    	System.out.println(user);
         for(int i=0;i<list.size();i++) {
-        	if(user.equals(list.get(i)))
-            	return "home";
+        	if(user.equals(list.get(i))) {
+        		System.out.println(list.get(i));
+        		return "home";
+        	}
+            	
         }
         
         return "loginerror";

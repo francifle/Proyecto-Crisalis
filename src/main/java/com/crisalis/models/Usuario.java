@@ -74,9 +74,9 @@ public class Usuario extends GenericModel{
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (Objects.equals(mail, other.mail) && Objects.equals(pass, other.pass))
+		if (this.getMail().equals(other.getMail()) && this.getPass().equals(other.getPass()))
 			return true;
-		return !super.equals(obj);
+		return super.equals(obj);
 	}
 
 	@Override

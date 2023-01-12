@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import com.crisalis.models.Producto;
 import com.crisalis.models.Servicio;
 import com.crisalis.repositories.ServicioRepository;
 
@@ -40,5 +41,14 @@ public class ServicioService {
     public void deleteServicioByID(Long id) {
     	this.servicioRepository.delete(findServicioByID(id));
     }
+
+	public Servicio findServicioByPedidoID(Long id) {
+		for (Servicio s : getAllServicios()) {
+			if (s.getPedido().getId().equals(id)) {
+				return s;
+			}
+		}
+		return null;
+	}
     
 }

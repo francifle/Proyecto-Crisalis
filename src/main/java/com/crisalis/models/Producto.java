@@ -24,21 +24,10 @@ import lombok.NoArgsConstructor;
 @Entity(name="Producto")
 @Table(name="Producto")
 public class Producto extends GenericModel {
-
-	@Column(name="anios", nullable=true)
-	private Integer anios;
     
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Pedido pedido;
 
-	public Integer getAnios() {
-		return anios;
-	}
-
-	public void setAnios(Integer anios) {
-		this.anios = anios;
-	}
-	
 	
 	public Pedido getPedido() {
 		return pedido;
@@ -48,12 +37,13 @@ public class Producto extends GenericModel {
 		this.pedido = pedido;
 	}
 
-	public Double getPrecioGarantia() {
-		return getPedido().getPrecioTotal() * BasicsConstants.PORCENTAJE_GARANTIA * getAnios();
+	public Double getPrecioGarantia(Integer anios) {
+		return getPedido().getPrecioTotal() * BasicsConstants.PORCENTAJE_GARANTIA * anios ;
 	}
 	
-	public Double getPrecioTotalProducto() {
-		return getPedido().getPrecioTotal() + getPrecioGarantia();
+	public Double getPrecioTotalProducto(Integer anios) {
+		Double value = getPedido().getPrecioTotal() + getPrecioGarantia(anios);
+		return Math.round(value*100.0)/100.0;
 	}
 	
 	

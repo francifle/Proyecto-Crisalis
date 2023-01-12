@@ -24,12 +24,6 @@ import lombok.NoArgsConstructor;
 @Entity(name="Servicio")
 @Table(name="Servicio")
 public class Servicio extends GenericModel {
-	
-	@Column(name="meses", nullable=true)
-	private Integer meses;
-	
-	@Column(name="cargo_mensual", nullable=true)
-	private Double cargoMensual;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Pedido pedido;
@@ -42,28 +36,14 @@ public class Servicio extends GenericModel {
 		this.pedido = pedido;
 	}
 	
-	public Integer getMeses() {
-		return meses;
-	}
 
-	public void setMeses(Integer meses) {
-		this.meses = meses;
+	public Double getCostoSoporte(Integer meses) {
+		return getPedido().getPrecioTotal() * BasicsConstants.CARGO_SOPORTE * meses;
 	}
 	
-	public Double getCargoMensual() {
-		return cargoMensual;
-	}
-
-	public void setCargoMensual(Double cargoMensual) {
-		this.cargoMensual = cargoMensual;
-	}
-
-	public Double getCostoMensual() {
-		return getPedido().getPrecioTotal() * getCargoMensual() * getMeses();
-	}
-	
-	public Double getPrecioTotalServicio() {
-		return getPedido().getPrecioTotal() + getCostoMensual();
+	public Double getPrecioTotalServicio(Integer meses) {
+		Double value = getPedido().getPrecioTotal() + getCostoSoporte(meses);
+		return Math.round(value*100.0)/100.0;
 	}
 	
 }

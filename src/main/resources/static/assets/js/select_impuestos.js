@@ -2,6 +2,7 @@ $(document).ready(function () {
  	$('.my-select').select2({
 		placeholder:'Agregar impuestos',
 		multiple:true,
+		theme: 'bootstrap',
 		ajax:{
 			type:'GET',
 			url:'../../ListRest/impuestos',

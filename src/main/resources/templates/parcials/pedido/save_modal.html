@@ -1,0 +1,106 @@
+<div id="addEmployeeModal" class="modal fade">
+	<div class="d-flex flex-row justify-content-center modal-dialog">
+		<div class="modal-lg">
+			<div class="modal-content">
+				<form action="/pedido/save" method="POST">
+					<div class="modal-header">
+						<h4 class="modal-title">Agregar Pedido</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col">
+									<div class="form-row">
+										<div class="col mb-3">
+											<label>Razon Social</label> <select name="nombre"
+												class="form-control selectpicker my-select" id="razonsocial"></select>
+										</div>
+										<div class="col mb-3">
+											<label>Persona</label> <select name="persona"
+												class="form-control selectpicker my-select" required
+												id="persona"></select>
+										</div>
+										<div class="col mb-3">
+											<label>Fecha</label> <input name="fecha" type="date"
+												class="form-control" required placeholder="Ej: DD/MM/AAA"
+												id="fecha">
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col tabla-wrapper">
+									<table class="table table-bordered sticky-header" id="tablaticket">
+										<thead>
+											<tr class="fijo">
+												<th scope="col">#</th>
+												<th scope="col">Tipo</th>
+												<th scope="col">Nombre</th>
+												<th scope="col">Cantidad</th>
+												<th scope="col">Importe</th>
+												<th scope="col">Cargos Adicionales</th>
+												<th scope="col">Descuento</th>
+												<th scope="col">Borrar</th>
+											</tr>
+										</thead>
+										<tbody>
+											
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col mb-3">
+
+									<label>Cargo Adicional</label> <label
+										class="text-right cant-cargo-label" id="cant-cargo-label">Años</label>
+									<div class="col">
+										<div class="row">
+											<select
+												class="form-control selectpicker my-select col cargos-select"
+												id="cargos" multiple data-live-search="true"
+												title="Agregar Cargo"></select> <input
+												class="col-3 form-control ml-2 intTextBox" maxlength="2"
+												type="text" id="cantidadcargo">
+										</div>
+									</div>
+								</div>
+								<div class="col mb-3">
+									<div class="dropdown drop-pedido">
+										<button
+											class="btn btn-white btn-sm dropdown-toggle drop-pedido-btn"
+											type="button" data-toggle="dropdown" aria-expanded="false"
+											id="tipoPedido">Productos</button>
+										<div class="dropdown-menu">
+											<button class="dropdown-item" type="button">Servicios</button>
+										</div>
+									</div>
+									<select name="pedido"
+										class="form-control selectpicker my-select" required
+										id="pedido"></select>
+								</div>
+								<div class="col mb-3">
+									<label>Cantidad</label> <input name="cantidad" id="cantidad"
+										type="text" class="form-control intTextBox" required
+										placeholder="Ej: 1">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="col align-items-start">
+							<input type="button" class="btn btn-secondary align-self-start"
+								data-dismiss="modal1" value="Agregar" id="agregar">
+						</div>
+						<input type="button" class="btn btn-default" data-dismiss="modal"
+							value="Cancelar"> <input type="submit"
+							class="btn btn-success" value="Confirmar Pedido">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

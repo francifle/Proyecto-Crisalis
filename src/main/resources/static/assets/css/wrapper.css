@@ -1,6 +1,68 @@
-.list-group{
-    max-height: 300px;
-    margin-bottom: 10px;
-    overflow-y:scroll;
-    -webkit-overflow-scrolling: touch;
+.list-group {
+	max-height: 300px;
+	margin-bottom: 10px;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
 }
+
+.tabla-wrapper {
+	height: 220px;
+	width: 800px;
+	margin-bottom: 10px;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+
+.fijo {
+	top: 0;
+	background: white;
+	border-color: black;
+}
+
+.drop-pedido {
+	height: 27px;
+	color: #566787;
+}
+
+.drop-pedido-btn {
+	color: #566787;
+	font-weight: bold;
+	margin-top: -7px;
+	margin-left: -8px;
+}
+
+#cargos {
+	width: 98%
+}
+
+.cant-cargo-label {
+	margin-left: 74px;
+}
+
+.delete-row {
+	min-width: auto !important;
+	display: block;
+	margin: auto;
+}
+.delete-row-i {
+	display: block;
+	margin: auto;
+}
+.delete-row:hover fa-times-circle:before{
+	content: "\black"
+}
+/*.select2-selection__choice {
+	display: flex;
+	align-items: center;
+}
+
+.select2-selection__choice__display {
+	margin-left: 9px;
+}*/
+
+/*.select2-selection__choice__remove {
+	border: none;
+	
+}.select2-search__field{
+	display: none;
+}*/

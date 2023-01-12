@@ -1,5 +1,8 @@
 package com.crisalis.services;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.crisalis.models.Pedido;
@@ -8,6 +11,7 @@ import com.crisalis.repositories.PedidoRepository;
 @Service
 public class PedidoService {
 
+	@Autowired
 	private final PedidoRepository pedidoRepository;
 	  
     public PedidoService(PedidoRepository pedidoRepository) {
@@ -20,4 +24,14 @@ public class PedidoService {
  	   }
  	return null;
  	}
+
+	public List<Pedido> getAllPedidos() {
+		//return this.pedidoRepository.findAll();
+		return null;
+	}
+	
+	public Pedido findPedidoByID(Long id) {
+		return this.pedidoRepository.getReferenceById(id);
+	}
+
 }

@@ -1,0 +1,31 @@
+<div th:id="@{editEmployeeModal}+${persona.getId()}" class="modal fade">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<form action="/persona/update" method="POST">
+		  <div class="modal-header">
+			<h4 class="modal-title">Editar <b th:text="${persona.getNombreCompleto()}"></b></h4>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  </div>
+		  <div class="modal-body">
+			<div class="form-group">
+			  <label>Nombre</label>
+			  <input th:value="${persona.getNombre()}" name="nombre" type="text" class="form-control" placeholder="Ej: Francisco">
+			</div>
+			<div class="form-group">
+			  <label>Apellido</label>
+			  <input th:value="${persona.getApellido()}" name="apellido" type="text" class="form-control" required placeholder="Ej: Fleytas">
+			</div>
+			<div class="form-group">
+				<label>DNI</label>
+				<input th:value="${persona.getDni()}" name="dni" type="text" id="intTextBox" class="form-control" required placeholder="Ej: 12345678" maxlength="8">
+			  </div>
+		  </div>
+		  <div class="modal-footer">
+			<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+			<input type="submit" class="btn btn-info" value="Guardar">
+			<input type="hidden" name="personaId" th:value="${persona.getId()}">
+		  </div>	
+		</form>
+	  </div>
+	</div>
+  </div>

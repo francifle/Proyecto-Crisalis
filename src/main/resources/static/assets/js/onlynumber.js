@@ -28,7 +28,7 @@
 
 
 // Install input filters.
-$("#intTextBox").inputFilter(function(value) {
+$(".intTextBox").inputFilter(function(value) {
   return /^-?\d*$/.test(value); }, "Solo numeros enteros");
 /*$("#uintTextBox").inputFilter(function(value) {
   return /^\d*$/.test(value); }, "Must be an unsigned integer");

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.crisalis.constants.BasicsConstants;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,6 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity(name="Pedido")
 @Table(name="Pedido")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Pedido extends GenericModel{
 
     @Column(name="nombre", nullable=false)

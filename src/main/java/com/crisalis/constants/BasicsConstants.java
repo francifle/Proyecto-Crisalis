@@ -8,7 +8,7 @@ public class BasicsConstants {
 
 	public static final Double PORCENTAJE_GARANTIA = 0.02;
 
-	public static final Double CARGO_MENSUAL = 0.05;
+	//public static final Double CARGO_MENSUAL = 0.05;
 
 	public static final Double CARGO_SOPORTE = 0.03;
 	

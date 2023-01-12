@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.crisalis.models.Empresa;
+import com.crisalis.models.Pedido;
 import com.crisalis.models.Persona;
 import com.crisalis.models.Producto;
 import com.crisalis.models.Servicio;
 import com.crisalis.services.EmpresaService;
+import com.crisalis.services.PedidoService;
 import com.crisalis.services.PersonaService;
 import com.crisalis.services.ProductoService;
 import com.crisalis.services.ServicioService;
@@ -29,13 +31,17 @@ public class ListController {
 	private final PersonaService personaService;
 	@Autowired
 	private final EmpresaService empresaService;
+	@Autowired
+	private final PedidoService pedidoService;
 
 	
-	public ListController(ProductoService productoService, ServicioService servicioService, PersonaService personaService, EmpresaService empresaService) {
+	public ListController(ProductoService productoService, ServicioService servicioService, PersonaService personaService, EmpresaService empresaService, PedidoService pedidoService) {
 		this.productoService = productoService;
 		this.servicioService = servicioService;
 		this.personaService = personaService;
 		this.empresaService = empresaService;
+		this.pedidoService = pedidoService;
+
 	}
 	
 	
@@ -70,6 +76,13 @@ public class ListController {
 		List<Persona> list = personaService.getAllPersonas();
 		mav.addObject("personas", list);
 		return mav;
-	}	
+	}		
 	
+	@GetMapping(value = "Pedidos")
+	public ModelAndView listPedido() {
+		ModelAndView mav = new ModelAndView("ListPedidos");
+		List<Pedido> list = pedidoService.getAllPedidos();
+		mav.addObject("pedidos", list);
+		return mav;
+	}
 }
