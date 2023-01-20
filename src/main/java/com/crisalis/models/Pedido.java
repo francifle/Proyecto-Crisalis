@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import com.crisalis.constants.BasicsConstants;
+import com.crisalis.constants.UtilsConstants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -84,12 +84,12 @@ public class Pedido extends GenericModel{
 	}
 
 	public Double getPrecioIVA() {
-		Double value =  getPrecio() * BasicsConstants.IVA;
+		Double value =  getPrecio() * UtilsConstants.IVA;
 		return Math.round(value*100.0)/100.0;
 	}
 	
 	public Double getPrecioIIBB() {
-		Double value = getPrecio() * BasicsConstants.IIBB;
+		Double value = getPrecio() * UtilsConstants.IIBB;
 		return Math.round(value*100.0)/100.0;
 	}
 	

@@ -2,7 +2,7 @@
 	<div class="d-flex flex-row justify-content-center modal-dialog">
 		<div class="modal-lg">
 			<div class="modal-content">
-				<form action="/pedido/save" method="POST">
+				<form action="/pedidoventa/save" method="POST">
 					<div class="modal-header">
 						<h4 class="modal-title">Agregar Pedido</h4>
 						<button type="button" class="close" data-dismiss="modal"
@@ -33,13 +33,13 @@
 							</div>
 							<div class="row">
 								<div class="col tabla-wrapper">
-									<table class="table table-bordered sticky-header" id="tablaticket">
+									<table class="table table-bordered sticky-header"
+										id="tablaticket">
 										<thead>
 											<tr class="fijo">
 												<th scope="col">#</th>
 												<th scope="col">Tipo</th>
-												<th scope="col">Nombre</th>
-												<th scope="col">Cantidad</th>
+												<th scope="col">Orden</th>
 												<th scope="col">Importe</th>
 												<th scope="col">Cargos Adicionales</th>
 												<th scope="col">Descuento</th>
@@ -47,11 +47,30 @@
 											</tr>
 										</thead>
 										<tbody>
-											
+
 										</tbody>
 									</table>
+
 								</div>
 							</div>
+							<div class="form-row">
+								<div class="col">
+									<label id="importe_total_label">Importe Total : 0</label> 
+								</div>
+								<input type="hidden" name="impTotal" id="impTotal">
+							</div>
+							<div class="form-row">
+								<div class="col">
+									<label id="importe_descuento_label">Descuento Total : 0</label>
+									<input type="hidden" name="descTotal" id="descTotal">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col mb-3">
+									<label id="importe_final_label">Importe Final : 0</label> 
+								</div>
+							</div>
+							
 							<div class="form-row">
 								<div class="col mb-3">
 

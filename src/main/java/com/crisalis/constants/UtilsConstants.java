@@ -1,6 +1,6 @@
 package com.crisalis.constants;
 
-public class BasicsConstants {
+public class UtilsConstants {
 
 	public static final Double IVA = 0.21;
 	
@@ -21,5 +21,13 @@ public class BasicsConstants {
 	public static final Integer TIPO_PRODUCTO = 1;
 	
 	public static final Integer TIPO_SERVICIO = 2;
+	
+	public static final String PEDIDO_VENTA_NOMBRE = "Pedido"; 
+	
+	public static final String SEPARADOR_CLIENTE = " // "; 
+	
+	public static final Boolean ESTADO_ACTIVO = Boolean.TRUE;
+	
+	public static final Boolean ESTADO_INACTIVO = Boolean.FALSE;
 
 }

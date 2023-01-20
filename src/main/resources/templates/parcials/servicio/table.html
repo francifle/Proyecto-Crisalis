@@ -25,7 +25,6 @@
 					<th>Fecha</th>
 					<th>Servicio</th>
 					<th>Costo Mensual</th>
-					<th>Impuestos</th>
 					<th>Total</th>
 					<th>Accion</th>
 				</tr>
@@ -38,14 +37,13 @@
 					<td th:text="${servicio.getPedido().getFecha()}"></td>
 					<td th:text="${servicio.getPedido().getNombre()}"></td>
 					<td th:text="${servicio.getPedido().getPrecio()}"></td>
-					<td th:text="${servicio.getPedido().getPrecioImpuestos()}"></td>
 					<td th:text="${servicio.getPedido().getPrecioTotal()}"></td>
 					<td><a th:href="@{#editEmployeeModal}+${servicio.getId()}"
 						class="edit" data-toggle="modal"><i class="material-icons"
-							 title="Edit">&#xE254;</i></a> <a
+							title="Edit">&#xE254;</i></a> <a
 						th:href="@{#deleteEmployeeModal}+${servicio.getId()}"
 						class="delete" data-toggle="modal"><i class="material-icons"
-							 title="Delete">&#xE872;</i></a></td>
+							title="Delete">&#xE872;</i></a></td>
 					<!-- Edit Modal HTML -->
 					<div th:replace="@{parcials/servicio/edit_modal}"></div>
 					<!-- Delete Modal HTML -->

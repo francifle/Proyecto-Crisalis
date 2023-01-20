@@ -10,8 +10,7 @@
 				<div class="col-sm-6">
 					<a href="#addEmployeeModal" class="btn btn-success"
 						data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar
-							pedido</span></a> 
-					<a href="#deleteEmployeeModalMultiple"
+							pedido</span></a> <a href="#deleteEmployeeModalMultiple"
 						class="btn btn-danger" data-toggle="modal"><i
 						class="material-icons">&#xE15C;</i> <span>Borrar</span></a>
 				</div>
@@ -23,11 +22,12 @@
 					<th><span class="custom-checkbox"> <input
 							type="checkbox" id="selectAll"> <label for="selectAll"></label>
 					</span></th>
+					<th>Fecha</th>
 					<th>Pedidos</th>
 					<th>Cliente</th>
-					<th>Descuentos</th>
-					<th>Precio Total</th>
-					<th>Accion</th>
+					<th>Importe Final</th>
+					<th>Detalles</th>
+					<th>Alta/Anulacion</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -36,18 +36,37 @@
 							type="checkbox" id="checkbox1" name="options[]" value="1">
 							<label for="checkbox1"></label>
 					</span></td>
-					<td th:text="${pedido.getNombreCompleto()}"></td>
-					<td th:text="${pedido.getDni()}" class="dni"></td>
-					<td><a th:href="@{#editEmployeeModal}+${pedido.getId()}"
-						class="edit" data-toggle="modal"><i class="material-icons"
-							 title="Edit">&#xE254;</i></a> <a
-						th:href="@{#deleteEmployeeModal}+${pedido.getId()}"
-						class="delete" data-toggle="modal"><i class="material-icons"
-							 title="Delete">&#xE872;</i></a></td>
-					<!-- Edit Modal HTML -->
-					<div th:replace="@{parcials/pedido/edit_modal}"></div>
-					<!-- Delete Modal HTML -->
-					<div th:replace="@{parcials/pedido/delete_modal}"></div>
+					<td th:text="${pedido.getFecha()}"></td>
+					<td th:text="${pedido.getNombre()}"></td>
+					<td th:text="${pedido.getCliente()}" class="hiddentext"></td>
+					<td th:text="${pedido.getImporteFinal()}"></td>
+<!-- 					<td><button type="button" -->
+<!-- 							class="btn btn-outline-secondary btn-sm">Ver más</button></td> -->
+					<td><a th:href="@{#ordenModal}+${pedido.getId()}"
+						class="btn btn-outline-secondary btn-sm" data-toggle="modal">Ver
+							más</a></td>
+					<div th:replace="@{parcials/pedido/list_items_modal}"></div>
+					<td>
+						<button type="button"
+							class="btn btn-outline-danger btn-sm changeEstado"
+							th:if="${pedido.getEstado()}">Anular</button>
+						<button type="button"
+							class="btn btn-outline-success btn-sm changeEstado"
+							th:if="${!pedido.getEstado()}">Activar</button> <input
+						th:value="${pedido.getId()}" type="hidden" name="pedidoVentaId">
+					</td>
+
+					<!-- 					<td><a th:href="@{#editEmployeeModal}+${pedido.getId()}" -->
+					<!-- 						class="edit" data-toggle="modal"><i class="material-icons" -->
+					<!-- 							title="Edit">&#xE254;</i></a> <a -->
+					<!-- 						th:href="@{#deleteEmployeeModal}+${pedido.getId()}" class="delete" -->
+					<!-- 						data-toggle="modal"><i class="material-icons" title="Delete">&#xE872;</i></a></td> -->
+					<!-- 					Edit Modal HTML -->
+					<!-- 					<div th:replace="@{parcials/pedido/edit_modal}"></div> -->
+					<!-- 					Delete Modal HTML -->
+					<!-- 					<div th:replace="@{parcials/pedido/delete_modal}"></div> -->
+					<!-- 					Members Modal HTML -->
+					<!-- 					<div th:replace="@{parcials/pedido/list_pedido_modal}"></div> -->
 				</tr>
 			</tbody>
 		</table>

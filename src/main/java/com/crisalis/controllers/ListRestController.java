@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.crisalis.constants.BasicsConstants;
+import com.crisalis.constants.UtilsConstants;
 import com.crisalis.models.Empresa;
 import com.crisalis.models.Impuesto;
 import com.crisalis.models.Pedido;
@@ -104,69 +104,5 @@ public class ListRestController {
 		return productoService.getAllProductos();
 	}
 
-	@GetMapping(value = "importeTabla/{idParam}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public Map<String, String> getImporteTabla(@PathVariable String idParam) {
-		Integer cantidadCargo = 0;
-		String[] ids = idParam.split("-");
-		String[] cargos = ids[2].split(",");
-		Pedido pedido = pedidoService.findPedidoByID(Long.valueOf(ids[0]));
-		if (cargos.length == 3) {
-			int inicioNum = cargos[2].indexOf("(") + 1;
-			int finNum = cargos[2].indexOf(")");
-			System.out.println(cargos[2]);
-			cantidadCargo = Integer.valueOf(cargos[2].substring(inicioNum, finNum));
-		} // Persona persona = personaService.findPersonaByID(Long.valueOf(ids[0]));
-		HashMap<String, String> map = new HashMap<>();
-		if (pedido.getTipo().equals(BasicsConstants.TIPO_PRODUCTO)) {
-			Producto pedidoProducto = productoService.findProductoByPedidoID(pedido.getId());
-			pedidoProducto = setNewImpuestos(pedidoProducto, cargos);
-			map.put("importe", pedidoProducto.getPrecioTotalProducto(cantidadCargo).toString());
-		}else {
-			Servicio pedidoServicio = servicioService.findServicioByPedidoID(pedido.getId());
-			pedidoServicio = setNewImpuestos(pedidoServicio, cargos);
-			map.put("importe", pedidoServicio.getPrecioTotalServicio(cantidadCargo).toString());
-		}
-		/*
-		 * if (pedido.getTipo().equals(BasicsConstants.TIPO_SERVICIO)) {
-		 * map.put("descuento", "0"); }else { map.put("descuento",
-		 * checkDescuentoByPersona(persona)); } map.put("value1", ids[0]);
-		 * map.put("value2", ids[1]); map.put("value3", ids[2]);
-		 */
-		map.put("descuento", "0");
-		return map;
-	}
-
-	private Servicio setNewImpuestos(Servicio pedidoServicio, String[] impuestos) {
-		pedidoServicio.getPedido().getImpuestos().clear();
-		Impuesto newImpuesto = null;
-		for (int i = 0; i < impuestos.length; i++) {
-			List<Impuesto> listImpuestos = impuestoService.getAllImpuestosByNombre(impuestos[i].trim());
-			if (listImpuestos != null && !listImpuestos.isEmpty()) {
-				newImpuesto = impuestoService.getAllImpuestosByNombre(impuestos[i].trim()).get(0);
-				if (newImpuesto != null)
-					pedidoServicio.getPedido().getImpuestos().add(newImpuesto);
-			}
-		}
-		return pedidoServicio;
-	}
-
-	private Producto setNewImpuestos(Producto pedidoProducto, String[] impuestos) {
-		pedidoProducto.getPedido().getImpuestos().clear();
-		Impuesto newImpuesto = null;
-		for (int i = 0; i < impuestos.length; i++) {
-			List<Impuesto> listImpuestos = impuestoService.getAllImpuestosByNombre(impuestos[i].trim());
-			if (listImpuestos != null && !listImpuestos.isEmpty()) {
-				newImpuesto = impuestoService.getAllImpuestosByNombre(impuestos[i].trim()).get(0);
-				if (newImpuesto != null)
-					pedidoProducto.getPedido().getImpuestos().add(newImpuesto);
-			}
-		}
-		return pedidoProducto;
-	}
-
-	private String checkDescuentoByPersona(Persona persona) {
-		// TODO Auto-generated method stub
-		return "0";
-	}
+	
 }

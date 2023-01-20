@@ -13,31 +13,42 @@
 					<div class="form-group">
 						<label>Razon Social</label> <input
 							th:value="${empresa.getRazonSocial()}" name="razonsocial"
-							type="text" class="form-control"
+							type="text" class="form-control" required
 							placeholder="Ej: Arroz Dos Hermanos">
 					</div>
 					<div class="form-group">
 						<label>Cuit</label> <input th:value="${empresa.getCuit()}"
 							name="cuit" type="text" class="form-control intTextBox" required
-							placeholder="Ej: 20-12345678-5" maxlength="11">
+							placeholder="Ej: 20-12345678-7" maxlength="11">
 					</div>
 					<div class="form-group">
 						<label>Inicio de Actividad</label> <input
 							th:value="${empresa.getFecha()}" name="fecha" type="date"
-							class="form-control intTextBox" required
-							placeholder="Ej: DD/MM/AAAA">
+							class="form-control" required placeholder="DD/MM/AAAA">
 					</div>
 					<div class="form-group">
 						<label>Integrantes</label> <select
-							class="form-control selectpicker my-select" name="select"
-							style="width: 100%;" tabindex="-1" aria-hidden="true" multiple
-							data-live-search="true" title="Agregar Integrantes" id="integrantes">
-							<option th:each="persona : ${empresa.getIntegrantes()}"
-								th:value="${persona.getId()}"
-								th:selected="${persona.getNombreCompleto()}"
-								th:text="${persona.getNombreCompleto()}"></option>
-						</select>
+							class="form-control selectpicker my-select integrantesEdit"
+							name="select" style="width: 100%;" tabindex="-1"
+							aria-hidden="true" multiple data-live-search="true"
+							title="Agregar Integrantes">
+<!-- 							<option -->
+<!-- 								th:each="persona : ${empresa.getIntegrantes()}" -->
+<!-- 								th:value="${persona.getId()}" -->
+<!-- 								th:selected="${persona.getNombreFisico()}" -->
+<!-- 								th:text="${persona.getNombreFisico()}"> -->
+<!-- 							</option> -->
+						</select> 
+						<input type="hidden" name="selectInput">
 					</div>
+					<!-- 					<div class="form-group"> -->
+					<!-- 						<label>Integrantes</label> <select -->
+					<!-- 							class="form-control selectpicker my-select" name="select" -->
+					<!-- 							style="width: 100%;" tabindex="-1" aria-hidden="true" multiple -->
+					<!-- 							data-live-search="true" title="Agregar Integrantes" -->
+					<!-- 							id="integrantes-new"> -->
+					<!-- 						</select> -->
+					<!-- 					</div> -->
 				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal"

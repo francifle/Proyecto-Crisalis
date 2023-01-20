@@ -1,6 +1,6 @@
 package com.crisalis.models;
 
-import com.crisalis.constants.BasicsConstants;
+import com.crisalis.constants.UtilsConstants;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,7 +38,7 @@ public class Servicio extends GenericModel {
 	
 
 	public Double getCostoSoporte(Integer meses) {
-		return getPedido().getPrecioTotal() * BasicsConstants.CARGO_SOPORTE * meses;
+		return getPedido().getPrecioTotal() * UtilsConstants.CARGO_SOPORTE * meses;
 	}
 	
 	public Double getPrecioTotalServicio(Integer meses) {

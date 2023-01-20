@@ -51,6 +51,7 @@
 .delete-row:hover fa-times-circle:before{
 	content: "\black"
 }
+
 /*.select2-selection__choice {
 	display: flex;
 	align-items: center;

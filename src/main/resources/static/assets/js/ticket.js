@@ -3,9 +3,9 @@ $(document).ready(function() {
 	//document.getElementById('agregar').addEventListener('click', function x)
 	$("#agregar").click(function() {
 		let pedidoselect = $(".filter-option-inner-inner")[3].innerHTML;
-		let pedido = pedidoselect.substring(0, pedidoselect.indexOf(" -"));
-		let tipo = $('#tipoPedido').html().slice(0, -1);
 		let cantidad = $("#cantidad").val();
+		let pedido = pedidoselect.substring(0, pedidoselect.indexOf(" -")) + " x " + cantidad;
+		let tipo = $('#tipoPedido').html().slice(0, -1);
 		let cargos = $(".filter-option-inner-inner")[2].innerHTML;
 		let importe = 0;
 		let descuento = 0;
@@ -18,20 +18,24 @@ $(document).ready(function() {
 		if (checkCargo)
 			cargos = cargos + '(' + cantidadCargo + ')'
 
-		let param = String($("#pedido").val() + "-" + persona + "-" + cargos);
-		importe = RefreshImportes(param).importe;
-		descuento = RefreshImportes(param).descuento;
 		if (pedido != '' && cantidad != '' && persona != '' && (!checkCargo || cantidadCargo != '')) {
+			let param = String($("#pedido").val() + "-" + persona + "-" + cargos);
+			importe = (RefreshImportes(param).importe * cantidad).toFixed(2);
+			descuento = RefreshImportes(param).descuento;
 			$("#tablaticket").last().append('<tr>' +
 				'<td class="contador">' + contador + '</td>' +
-				'<td>' + tipo + '</td>' +
-				'<td>' + pedido + '</td>' +
-				'<td>' + cantidad + '</td>' +
-				'<td>' + importe + '</td>' +
+				'<td class="tipo">' + tipo + '</td>' +
+				'<td> ' + pedido + '</td>' +
+				'<td class="importe">' + importe + '</td>' +
 				'<td>' + cargos + '</td>' +
-				'<td>' + descuento + '</td>' +
+				'<td class="descuento">' + descuento + '</td>' +
 				'<td>' + btnDelete + '</td>' +
+				'<input type="hidden" name="tipoOrden" value="' + tipo + '" >' +
+				'<input type="hidden" name="nombreOrden" value="' + pedido + '" >' +
+				'<input type="hidden" name="importeOrden" value="' + importe + '" >' +
+				'<input type="hidden" name="cargoOrden" value="' + cargos + '" >' +
 				'</tr>');
+			checkDescuentos();
 			/*var $demo1 = $('tabla');
 			$demo1.floatThead({
 				scrollContainer: function($table) {
@@ -87,6 +91,11 @@ $(document).ready(function() {
 		}
 	});
 
+	$('#pedido').change(function() {
+		$("#cantidad").val(1);
+	});
+
+
 	//-------------------------------------------------------Inicializar------------------------------------------------------------------------------
 	RefreshPersona(0);
 	RefreshPedidos(0);
@@ -98,11 +107,67 @@ $(document).ready(function() {
 		for (var i = 0; i < $('.contador').length; i++) {
 			$('.contador')[i].innerHTML = i + 1;
 		}
+		checkDescuentos();
+	})
+
+	$('.hiddentext').each(function(f) {
+
+		var newstr = $(this).text().substring(0, 37);
+		if ($(this).text().length > 37)
+			newstr += "..."
+		$(this).text(newstr);
+
+	});
+	
+	$('.changeEstado').each(function(f) {
+		let btn = $(this);
+		if (btn.text() == "Anular") {
+			btn.closest("tr").css("text-decoration", "none")
+		} else {
+				btn.closest("tr").css("text-decoration", "line-through")
+		}
+
+	});
+	$('.changeEstado').click(function() {
+		let pedidoVentaId = $(this).closest('td').find("input[name='pedidoVentaId']")[0].value;
+
+		/*$.ajax({
+			type: "GET",
+			url: "/pedidoventa/changeEstado/" + pedidoVentaId,
+			processData: false,
+			contentType: 'application/json',
+			//data: JSON.stringify(data),
+			success: function(r) {
+				console.log("actualizado")
+			}
+		});*/
+		let btn = $(this);
+		$.ajax({
+			url: "/PedidoVentaRest/changeEstado/" + pedidoVentaId,
+			type: "GET",
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			async: true,
+			success: function(data) {
+				/*$(this).closest("button.btn-outline-danger").hide();
+				$(this).closest("button.btn-outline-success").hide();*/
+				if (data.estado) {
+					btn.addClass("btn-outline-danger");
+					btn.removeClass("btn-outline-success");
+					btn.text("Anular")
+					btn.closest("tr").css("text-decoration", "none")
+					//$(this).closest("button.btn-outline-danger").show();
+				} else {
+					btn.addClass("btn-outline-success");
+					btn.removeClass("btn-outline-danger");
+					btn.text("Activar")
+					btn.closest("tr").css("text-decoration", "line-through")
+					//$(this).closest("button.btn-outline-success").show();
+				}
+			}
+		});
 	})
 });
-function removeRow(button) {
-	$(button).closest('tr').remove()
-}
 
 function RefreshCargos(check) {
 	$('#cargos').empty();
@@ -131,8 +196,55 @@ function RefreshPersona(id) {
 	})
 }
 
+function checkDescuentos() {
+	let checkServicio = 0;
+	let textImporteTotal = "Importe Total : ";
+	let textDescuentoTotal = "Descuento Total : ";
+	let textImporteFinal = "Importe Final : ";
+	let sumImporteTotal = 0;
+	let sumDescuentoTotal = 0;
+	let sumImporteFinal = 0;
+	let descuento = 0;
+
+	for (var i = 0; i < $('.tipo').length; i++) {
+		let tipo = $('.tipo')[i].innerHTML;
+		if (tipo === "Servicio" || (tipo === "Producto" && $('.descuento')[i].innerHTML !== "0")) {
+			checkServicio = 1;
+			break;
+		}
+	}
+	for (var i = 0; i < $('.descuento').length; i++) {
+		if ($('.tipo')[i].innerHTML === "Producto") {
+			descuento = Number(($('.importe')[i].innerHTML * 0.1).toFixed(2));
+			if (sumDescuentoTotal + descuento < 2500) {
+				sumDescuentoTotal += descuento * checkServicio;
+			} else {
+				descuento = (2500 - sumDescuentoTotal).toFixed(2);
+				sumDescuentoTotal = 2500 * checkServicio;;
+			}
+			if (descuento != 0) {
+				$('.descuento')[i].innerHTML = descuento * checkServicio;
+			} else {
+				$('.descuento')[i].innerHTML = "DESCUENTO EXCEDIDO";
+			}
+		}
+		sumImporteTotal += Number($('.importe')[i].innerHTML);
+	}
+	sumImporteTotal = sumImporteTotal.toFixed(2);
+	sumDescuentoTotal = sumDescuentoTotal.toFixed(2);
+	sumImporteFinal = (sumImporteTotal - sumDescuentoTotal).toFixed(2);
+
+	$('#importe_total_label').html(textImporteTotal + sumImporteTotal);
+	$('#importe_descuento_label').html(textDescuentoTotal + sumDescuentoTotal);
+	$('#importe_final_label').html(textImporteFinal + sumImporteFinal);
+	$('#impTotal').val(sumImporteTotal);
+	$('#descTotal').val(sumDescuentoTotal);
+
+
+}
+
 function RefreshImportes(param) {
-	var href = "http://localhost:8080/ListRest/importeTabla/" + param
+	var href = "http://localhost:8080/PedidoVentaRest/importeTabla/" + param
 	let result = null;
 	$.ajax({
 		url: href,

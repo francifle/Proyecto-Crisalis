@@ -10,10 +10,10 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.crisalis.models.Empresa;
-import com.crisalis.models.Impuesto;
 import com.crisalis.models.Persona;
 import com.crisalis.services.EmpresaService;
 import com.crisalis.services.PersonaService;
@@ -71,7 +71,8 @@ public class EmpresaController {
 		String fecha = req.getParameter("fecha");
 		String razonsocial = req.getParameter("razonsocial"); 
 		String cuit = req.getParameter("cuit");
-		String[] select = req.getParameterValues("select");
+		String valuesSelect = req.getParameter("selectInput");
+		String[] select = valuesSelect.split(";");
 		Set<Persona> personas = new HashSet<>();
 		for (int i = 0; i < select.length; i++) {
 			Long personaId = Long.valueOf(Arrays.asList(select).get(i));

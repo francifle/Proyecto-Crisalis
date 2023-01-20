@@ -1,6 +1,6 @@
 package com.crisalis.models;
 
-import com.crisalis.constants.BasicsConstants;
+import com.crisalis.constants.UtilsConstants;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,7 +38,7 @@ public class Producto extends GenericModel {
 	}
 
 	public Double getPrecioGarantia(Integer anios) {
-		return getPedido().getPrecioTotal() * BasicsConstants.PORCENTAJE_GARANTIA * anios ;
+		return getPedido().getPrecioTotal() * UtilsConstants.PORCENTAJE_GARANTIA * anios ;
 	}
 	
 	public Double getPrecioTotalProducto(Integer anios) {

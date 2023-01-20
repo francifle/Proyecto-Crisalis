@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.crisalis.constants.BasicsConstants;
+import com.crisalis.constants.UtilsConstants;
 import com.crisalis.models.Impuesto;
 import com.crisalis.models.Pedido;
 import com.crisalis.models.Servicio;
@@ -44,12 +44,7 @@ public class ServicioController {
 		String servicio = req.getParameter("servicio");
 		String fecha = req.getParameter("fecha");
 		String precio = req.getParameter("precio");
-		String[] select = req.getParameterValues("select");
 		Set<Impuesto> impuestos = new HashSet<>();
-		for (int i = 0; i < select.length; i++) {
-			Long impuestoId = Long.valueOf(Arrays.asList(select).get(i));
-			impuestos.add(impuestoService.findImpuestoByID(impuestoId));
-		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss"); //Formateo para Java
 		Date date = sdf.parse(fecha + " 00:00:00"); //Crea el date de Java
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime()); //Crea el date de SQL
@@ -58,7 +53,7 @@ public class ServicioController {
 		pedido.setPrecio(Integer.valueOf(precio));
 		pedido.setFecha(sqlDate);
 		pedido.setImpuestos(impuestos);
-		pedido.setTipo(BasicsConstants.TIPO_SERVICIO);
+		pedido.setTipo(UtilsConstants.TIPO_SERVICIO);
 		Servicio newServicio = new Servicio();
 		newServicio.setPedido(pedido);
 		newServicio = this.servicioService.saveOrUpdateServicio(newServicio);

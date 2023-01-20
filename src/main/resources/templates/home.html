@@ -1,62 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="assets/img/isotipo_finneg.png">
-  <title>Crisalis</title>
-  <style th:replace="@{parcials/admin_styles}"></style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="assets/img/isotipo_finneg.png">
+<title>Crisalis</title>
+<style th:replace="@{parcials/admin_styles}"></style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+	<div class="wrapper">
 
-  <!-- Preloader -->
-  <div th:replace="@{parcials/admin_preloader}"></div>
+		<!-- Preloader -->
+		<div th:replace="@{parcials/admin_preloader}"></div>
 
-  <!-- Navbar -->
-  <div th:replace="@{parcials/admin_navbar}"></div>
+		<!-- Navbar -->
+		<div th:replace="@{parcials/admin_navbar}"></div>
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="#" class="brand-link">
-      <img th:src="@{assets/AdminLTE/dist/img/isotipo_finneg.png}" alt="Finnegans Logo" class="brand-image pt-2 " style="opacity: .8">
-      <span class="brand-text font-weight-light justify-content-center">Crisalis</span>
-    </a>
+		<!-- Main Sidebar Container -->
+		<aside class="main-sidebar sidebar-dark-primary elevation-4">
+			<!-- Brand Logo -->
+			<a href="#" class="brand-link"> <img
+				th:src="@{assets/AdminLTE/dist/img/isotipo_finneg.png}"
+				alt="Finnegans Logo" class="brand-image pt-2 " style="opacity: .8">
+				<span class="brand-text font-weight-light justify-content-center">Crisalis</span>
+			</a>
 
-    <!-- Sidebar -->
-    <div th:replace="@{parcials/admin_sidebar}"></div>
-  </aside>
+			<!-- Sidebar -->
+			<div th:replace="@{parcials/admin_sidebar}"></div>
+		</aside>
 
-    <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Content</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Content</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="jumbotron ml-4" style="width: 96%">
+							<h1 class="display-4">Francisco Fleytas:</h1>
+							<p class="lead">Estudiante autodidacta aprendiendo distintos lenguajes, entre ellos:
+								<br>-Java
+								<br>-Javascript
+								<br>-SQL
+							</p>
+							<hr class="my-4">
+							<p>It uses utility classes for typography and spacing to
+								space content out within the larger container.</p>
+							<a class="btn btn-primary btn-lg" href="#" role="button">Learn
+								more</a>
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.container-fluid -->
+			</div>
+			<!-- /.content-header -->
 
-    <!-- Control Sidebar -->
-    <div th:replace="@{parcials/admin_controlsidebar}"></div>
-    <!-- /.control-sidebar -->
-  </div>
-    <!-- Main Footer -->
-  <footer th:replace="@{parcials/admin_footer}"></footer>
-</div>
-<!-- ./wrapper -->
-<!-- Scripts -->
-    <div th:replace="@{parcials/admin_scripts}"></div>
+			<!-- Control Sidebar -->
+			<div th:replace="@{parcials/admin_controlsidebar}"></div>
+			<!-- /.control-sidebar -->
+		</div>
+		<!-- Main Footer -->
+		<footer th:replace="@{parcials/admin_footer}"></footer>
+	</div>
+	<!-- ./wrapper -->
+	<!-- Scripts -->
+	<div th:replace="@{parcials/admin_scripts}"></div>
 </body>
 </html>

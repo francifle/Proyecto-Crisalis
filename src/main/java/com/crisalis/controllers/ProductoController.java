@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.crisalis.constants.BasicsConstants;
+import com.crisalis.constants.UtilsConstants;
 import com.crisalis.models.Pedido;
 import com.crisalis.models.Producto;
 import com.crisalis.services.ProductoService;
@@ -41,7 +41,7 @@ public class ProductoController {
 		pedido.setNombre(producto);
 		pedido.setPrecio(Integer.valueOf(precio));
 		pedido.setFecha(sqlDate);
-		pedido.setTipo(BasicsConstants.TIPO_PRODUCTO);
+		pedido.setTipo(UtilsConstants.TIPO_PRODUCTO);
 		Producto newProducto = new Producto();
 		newProducto.setPedido(pedido);
 		newProducto = this.productoService.saveOrUpdateProducto(newProducto);
