@@ -3,6 +3,7 @@ package com.crisalis.models;
 import java.util.Objects;
 
 import com.crisalis.models.dto.UserDTO;
+import com.crisalis.utils.Encrypter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -75,6 +76,8 @@ public class Usuario extends GenericModel{
 			return false;
 		Usuario other = (Usuario) obj;
 		if (this.getMail().equals(other.getMail()) && this.getPass().equals(other.getPass()))
+			return true;
+		if (this.getMail().equals(other.getMail()) && Encrypter.match(this.getPass(), other.getPass()))
 			return true;
 		return super.equals(obj);
 	}

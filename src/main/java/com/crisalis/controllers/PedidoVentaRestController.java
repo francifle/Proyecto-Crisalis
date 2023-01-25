@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,6 @@ import com.crisalis.models.PedidoVenta;
 import com.crisalis.models.Persona;
 import com.crisalis.models.Producto;
 import com.crisalis.models.Servicio;
-import com.crisalis.services.EmpresaService;
 import com.crisalis.services.ImpuestoService;
 import com.crisalis.services.PedidoService;
 import com.crisalis.services.PedidoVentaService;
@@ -70,7 +70,12 @@ public class PedidoVentaRestController {
 		Integer cantidadCargo = 0;
 		String[] ids = idParam.split("-");
 		String[] cargos = ids[2].split(",");
-		Pedido pedido = pedidoService.findPedidoByID(Long.valueOf(ids[0]));
+		Pedido pedido = null;	
+		if (StringUtils.isNumeric(ids[0])) {
+			pedido = pedidoService.findPedidoByID(Long.valueOf(ids[0]));
+		}else {
+			pedido = pedidoService.findPedidoByNombre(ids[0]);
+		}
 		if (cargos.length == 3) {
 			int inicioNum = cargos[2].indexOf("(") + 1;
 			int finNum = cargos[2].indexOf(")");
@@ -125,7 +130,7 @@ public class PedidoVentaRestController {
 		ArrayList<PedidoVenta> listaPedidos = pedidoVentaService.getAllPedidoVentas();
 		for (PedidoVenta p : listaPedidos) {
 			if(p.getCliente().contains(persona) && p.getEstado() && !p.getOrdenesServicio().isEmpty()) {
-				System.out.println(p.getEstado());
+				//System.out.println(p.getEstado());
 				Double value = importe * UtilsConstants.DESC_BENEFICIO;
 				return String.valueOf(Math.round(value * 100.0) / 100.0);
 			}

@@ -9,7 +9,6 @@ import com.crisalis.repositories.ProductoRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 
 @Service
 public class ProductoService {

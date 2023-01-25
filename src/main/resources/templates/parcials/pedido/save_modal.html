@@ -14,8 +14,12 @@
 								<div class="col">
 									<div class="form-row">
 										<div class="col mb-3">
-											<label>Razon Social</label> <select name="nombre"
-												class="form-control selectpicker my-select" id="razonsocial"></select>
+											<label>Razon Social</label>
+											<div class="selectEmpresaDiv">
+												<select name="nombre"
+													class="form-control selectpicker my-select"
+													id="razonsocial"></select>
+											</div>
 										</div>
 										<div class="col mb-3">
 											<label>Persona</label> <select name="persona"
@@ -55,7 +59,7 @@
 							</div>
 							<div class="form-row">
 								<div class="col">
-									<label id="importe_total_label">Importe Total : 0</label> 
+									<label id="importe_total_label">Importe Total : 0</label>
 								</div>
 								<input type="hidden" name="impTotal" id="impTotal">
 							</div>
@@ -67,10 +71,10 @@
 							</div>
 							<div class="form-row">
 								<div class="col mb-3">
-									<label id="importe_final_label">Importe Final : 0</label> 
+									<label id="importe_final_label">Importe Final : 0</label>
 								</div>
 							</div>
-							
+
 							<div class="form-row">
 								<div class="col mb-3">
 
@@ -114,7 +118,7 @@
 							<input type="button" class="btn btn-secondary align-self-start"
 								data-dismiss="modal1" value="Agregar" id="agregar">
 						</div>
-						<input type="button" class="btn btn-default" data-dismiss="modal"
+						<input type="button" id="btnCancelar" class="btn btn-default" data-dismiss="modal"
 							value="Cancelar"> <input type="submit"
 							class="btn btn-success" value="Confirmar Pedido">
 					</div>

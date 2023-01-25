@@ -1,10 +1,7 @@
 package com.crisalis.controllers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.crisalis.constants.UtilsConstants;
 import com.crisalis.models.Empresa;
 import com.crisalis.models.Impuesto;
 import com.crisalis.models.Pedido;
 import com.crisalis.models.Persona;
 import com.crisalis.models.Producto;
-import com.crisalis.models.Servicio;
 import com.crisalis.services.EmpresaService;
 import com.crisalis.services.ImpuestoService;
 import com.crisalis.services.PedidoService;

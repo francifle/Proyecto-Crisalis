@@ -40,8 +40,8 @@
 					<td th:text="${pedido.getNombre()}"></td>
 					<td th:text="${pedido.getCliente()}" class="hiddentext"></td>
 					<td th:text="${pedido.getImporteFinal()}"></td>
-<!-- 					<td><button type="button" -->
-<!-- 							class="btn btn-outline-secondary btn-sm">Ver más</button></td> -->
+					<!-- 					<td><button type="button" -->
+					<!-- 							class="btn btn-outline-secondary btn-sm">Ver más</button></td> -->
 					<td><a th:href="@{#ordenModal}+${pedido.getId()}"
 						class="btn btn-outline-secondary btn-sm" data-toggle="modal">Ver
 							más</a></td>
@@ -54,7 +54,12 @@
 							class="btn btn-outline-success btn-sm changeEstado"
 							th:if="${!pedido.getEstado()}">Activar</button> <input
 						th:value="${pedido.getId()}" type="hidden" name="pedidoVentaId">
+							<a th:href="@{#editEmployeeModal}+${pedido.getId()}"
+						class="edit" th:if="${pedido.getEstado()}" data-toggle="modal"><i class="material-icons"
+							title="Edit">&#xE254;</i></a>
 					</td>
+					</td>
+				
 
 					<!-- 					<td><a th:href="@{#editEmployeeModal}+${pedido.getId()}" -->
 					<!-- 						class="edit" data-toggle="modal"><i class="material-icons" -->

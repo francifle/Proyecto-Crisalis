@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.crisalis.models.Pedido;
 
 @Repository
-public interface PedidoRepository extends JpaRepository <Pedido, Long> {}
+public interface PedidoRepository extends JpaRepository<Pedido, Long> {
+
+}

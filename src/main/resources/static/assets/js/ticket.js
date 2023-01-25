@@ -25,9 +25,9 @@ $(document).ready(function() {
 			$("#tablaticket").last().append('<tr>' +
 				'<td class="contador">' + contador + '</td>' +
 				'<td class="tipo">' + tipo + '</td>' +
-				'<td> ' + pedido + '</td>' +
+				'<td class="pedidoCol"> ' + pedido + '</td>' +
 				'<td class="importe">' + importe + '</td>' +
-				'<td>' + cargos + '</td>' +
+				'<td class="cargosCol">' + cargos + '</td>' +
 				'<td class="descuento">' + descuento + '</td>' +
 				'<td>' + btnDelete + '</td>' +
 				'<input type="hidden" name="tipoOrden" value="' + tipo + '" >' +
@@ -45,19 +45,22 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#razonsocial').empty().append('<option value="0">-Sin Empresa-</option>');
-	var href = "http://localhost:8080/ListRest/empresas"
-	$.get(href, function(empresas, status) {
-		for (var i = 0; i <= empresas.length - 1; i++) {
-			$('#razonsocial').append('<option value="' + empresas[i].id + '">' + empresas[i].razonSocial + '</option>');
-			$('#razonsocial').selectpicker('refresh');
-		}
-	})
-
 	$('#razonsocial').on('change', function() {
 		var empresaid = $(this).val();
 		RefreshPersona(empresaid);
+		//RefreshTicket(0);
 	})
+
+	$('#persona').on('change', function() {
+		//	RefreshTicket(0);
+		checkDescuentosHistorico();
+		checkDescuentos();
+	})
+
+	$('#btnCancelar').on('click', function() {
+		RefreshTicket(1);
+	})
+
 
 	$('.dropdown-menu').on('click', 'button', function() {
 		var check = 0;
@@ -97,6 +100,7 @@ $(document).ready(function() {
 
 
 	//-------------------------------------------------------Inicializar------------------------------------------------------------------------------
+	RefreshEmpresa();
 	RefreshPersona(0);
 	RefreshPedidos(0);
 	RefreshCargos(0);
@@ -107,6 +111,7 @@ $(document).ready(function() {
 		for (var i = 0; i < $('.contador').length; i++) {
 			$('.contador')[i].innerHTML = i + 1;
 		}
+		checkDescuentosHistorico();
 		checkDescuentos();
 	})
 
@@ -118,13 +123,13 @@ $(document).ready(function() {
 		$(this).text(newstr);
 
 	});
-	
+
 	$('.changeEstado').each(function(f) {
 		let btn = $(this);
 		if (btn.text() == "Anular") {
 			btn.closest("tr").css("text-decoration", "none")
 		} else {
-				btn.closest("tr").css("text-decoration", "line-through")
+			btn.closest("tr").css("text-decoration", "line-through")
 		}
 
 	});
@@ -156,12 +161,14 @@ $(document).ready(function() {
 					btn.removeClass("btn-outline-success");
 					btn.text("Anular")
 					btn.closest("tr").css("text-decoration", "none")
+					btn.closest("td").find("a").show()
 					//$(this).closest("button.btn-outline-danger").show();
 				} else {
 					btn.addClass("btn-outline-success");
 					btn.removeClass("btn-outline-danger");
 					btn.text("Activar")
 					btn.closest("tr").css("text-decoration", "line-through")
+					btn.closest("td").find("a").hide()
 					//$(this).closest("button.btn-outline-success").show();
 				}
 			}
@@ -194,6 +201,28 @@ function RefreshPersona(id) {
 			$('#persona').selectpicker('refresh');
 		}
 	})
+}
+
+function checkDescuentosHistorico() {
+	let persona = $("#persona").val();
+	let param = "";
+	let cantidad = "";
+	let pedido = "";
+	let cargos = "";
+	let pedidoCol = "";
+	let descuento = "";
+	let importe = "";
+	for (var i = 0; i < $('.pedidoCol').length; i++) {
+		pedidoCol = $(".pedidoCol")[i].innerHTML;
+		pedido = pedidoCol.substring(0, pedidoCol.indexOf(" x")).trim();
+		cantidad = pedidoCol.substring(pedidoCol.indexOf("x ")).replace("x ", "").trim()
+		cargos = $(".cargosCol")[i].innerHTML;
+		param = String(pedido + "-" + persona + "-" + cargos);
+		importe = (RefreshImportes(param).importe * cantidad).toFixed(2);
+		descuento = RefreshImportes(param).descuento;
+		$('.descuento')[i].innerHTML = descuento;
+		$('.importe')[i].innerHTML = importe;
+	}
 }
 
 function checkDescuentos() {
@@ -243,6 +272,17 @@ function checkDescuentos() {
 
 }
 
+function RefreshEmpresa() {
+	$('#razonsocial').empty().append('<option value="0">-Sin Empresa-</option>');
+	var href = "http://localhost:8080/ListRest/empresas"
+	$.get(href, function(empresas, status) {
+		for (var i = 0; i <= empresas.length - 1; i++) {
+			$('#razonsocial').append('<option value="' + empresas[i].id + '">' + empresas[i].razonSocial + '</option>');
+			$('#razonsocial').selectpicker('refresh');
+		}
+	})
+}
+
 function RefreshImportes(param) {
 	var href = "http://localhost:8080/PedidoVentaRest/importeTabla/" + param
 	let result = null;
@@ -270,4 +310,31 @@ function RefreshPedidos(check) {
 			$('#pedido').selectpicker('refresh');
 		}
 	})
+}
+
+function RefreshTicket(check) {
+	if (check === 1) {
+		RefreshEmpresa();
+		RefreshPersona(0);
+	}
+	$("#tablaticket tbody").empty();
+	$("#fecha").val("");
+	RefreshPedidos(0);
+	RefreshCargos(0);
+	$('#cantidad').val("");
+	$('#cantidadcargo').val("");
+	let btnDropdown = $('.dropdown-menu button');
+	var cargoLabel = 'Años';
+	btnDropdown.closest('.dropdown').find('.dropdown-toggle').html("Productos");
+	btnDropdown.html("Servicios");
+	$('#cant-cargo-label').html(cargoLabel);
+	$('#cantidadcargo').hide();
+	$('#cant-cargo-label').hide();
+	$('#importe_total_label').html("Importe Total : 0");
+	$('#importe_descuento_label').html("Descuento Total : 0");
+	$('#importe_final_label').html("Importe Final : 0");
+	$('#impTotal').val(0);
+	$('#descTotal').val(0);
+
+
 }
