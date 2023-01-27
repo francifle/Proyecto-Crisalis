@@ -11,7 +11,7 @@
 					<a href="#addEmployeeModal" class="btn btn-success"
 						data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar
 							pedido</span></a> <a href="#deleteEmployeeModalMultiple"
-						class="btn btn-danger" data-toggle="modal"><i
+						class="btn btn-danger" id="deleteMultipleBtn" data-toggle="modal"><i
 						class="material-icons">&#xE15C;</i> <span>Borrar</span></a>
 				</div>
 			</div>
@@ -33,8 +33,10 @@
 			<tbody>
 				<tr th:each="pedido: ${pedidos}">
 					<td><span class="custom-checkbox"> <input
-							type="checkbox" id="checkbox1" name="options[]" value="1">
-							<label for="checkbox1"></label>
+							class="checkBoxDelete" type="checkbox"
+							th:id="@{checkbox} + ${pedido.getId()}" name="options[]"
+							th:value="${pedido.getId()}"> <label
+							th:for="@{checkbox} + ${pedido.getId()}"></label>
 					</span></td>
 					<td th:text="${pedido.getFecha()}"></td>
 					<td th:text="${pedido.getNombre()}"></td>
@@ -47,19 +49,22 @@
 							más</a></td>
 					<div th:replace="@{parcials/pedido/list_items_modal}"></div>
 					<td>
-						<button type="button"
-							class="btn btn-outline-danger btn-sm changeEstado"
-							th:if="${pedido.getEstado()}">Anular</button>
-						<button type="button"
-							class="btn btn-outline-success btn-sm changeEstado"
-							th:if="${!pedido.getEstado()}">Activar</button> <input
-						th:value="${pedido.getId()}" type="hidden" name="pedidoVentaId">
-							<a th:href="@{#editEmployeeModal}+${pedido.getId()}"
-						class="edit" th:if="${pedido.getEstado()}" data-toggle="modal"><i class="material-icons"
-							title="Edit">&#xE254;</i></a>
+						<div class="btn-group">
+							<button
+								class="btn btn-secondary btn-sm dropdown-toggle dropdownEstado"
+								type="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">Activado</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item changeEstado" href="#"
+									th:if="${pedido.getEstado()}">Anular</a> <a
+									class="dropdown-item changeEstado" href="#"
+									th:if="${!pedido.getEstado()}">Activar</a>
+								<a class="dropdown-item editarPedido">Editar</a>
+								<input th:value="${pedido.getId()}" type="hidden"
+									name="pedidoVentaId">
+							</div>
+						</div>
 					</td>
-					</td>
-				
 
 					<!-- 					<td><a th:href="@{#editEmployeeModal}+${pedido.getId()}" -->
 					<!-- 						class="edit" data-toggle="modal"><i class="material-icons" -->
@@ -77,6 +82,10 @@
 		</table>
 	</div>
 	<div th:replace="@{parcials/pedido/delete_multiple}"></div>
-	<!-- Edit Modal HTML -->
+	<!-- Save Modal HTML -->
 	<div th:replace="@{parcials/pedido/save_modal}"></div>
+	<!-- Edit Modal HTML -->
+	<div th:replace="@{parcials/pedido/edit_modal}"></div>
+	<!-- Error Modal HTML -->
+	<div th:replace="@{parcials/pedido/sin_item_modal}"></div>
 </div>

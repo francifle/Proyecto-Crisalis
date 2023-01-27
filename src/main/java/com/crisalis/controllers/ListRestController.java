@@ -32,7 +32,6 @@ public class ListRestController {
 	private EmpresaService empresaService;
 	private ProductoService productoService;
 	private ServicioService servicioService;
-	private PedidoService pedidoService;
 
 	public ListRestController(ImpuestoService impuestoService, PersonaService personaService,
 			EmpresaService empresaService, ProductoService productoService, ServicioService servicioService,
@@ -42,7 +41,6 @@ public class ListRestController {
 		this.empresaService = empresaService;
 		this.productoService = productoService;
 		this.servicioService = servicioService;
-		this.pedidoService = pedidoService;
 
 	}
 

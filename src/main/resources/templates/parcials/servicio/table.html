@@ -31,9 +31,10 @@
 			</thead>
 			<tbody>
 				<tr th:each="servicio: ${servicios}">
-					<td><span class="custom-checkbox"><input
-							type="checkbox" id="checkbox1" name="options[]" value="1">
-							<label for="checkbox1"></label> </span></td>
+					<td><span class="custom-checkbox"> <input
+							type="checkbox" th:id="@{checkbox} + ${servicio.getId()}" name="options[]" th:value="${servicio.getId()}">
+							<label th:for="@{checkbox} + ${servicio.getId()}"></label>
+					</span></td>
 					<td th:text="${servicio.getPedido().getFecha()}"></td>
 					<td th:text="${servicio.getPedido().getNombre()}"></td>
 					<td th:text="${servicio.getPedido().getPrecio()}"></td>

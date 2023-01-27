@@ -2,6 +2,7 @@ package com.crisalis.controllers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -75,24 +76,33 @@ public class PedidoVentaController {
 		pedidoVenta = pedidoVentaService.saveOrUpdatePedidoVenta(pedidoVenta);
 		pedidoVenta.setNombre(UtilsConstants.PEDIDO_VENTA_NOMBRE + " - " + pedidoVenta.getId());
 		pedidoVenta = pedidoVentaService.saveOrUpdatePedidoVenta(pedidoVenta);
-
-		/*
-		 * System.out.println("Importe Total - " + req.getParameter("impTotal"));
-		 * System.out.println("Descuento Total - " + req.getParameter("descTotal"));
-		 * System.out.println("Importe Final - " + req.getParameter("impFinal"));
-		 * System.out.println("Persona - " + req.getParameter("persona"));
-		 * System.out.println("Empresa - " + req.getParameter("nombre"));
-		 * System.out.println("Fecha - " + req.getParameter("fecha")); String[] select =
-		 * req.getParameterValues("tipoOrden"); for (int i = 0; i < select.length; i++)
-		 * { System.out.println("tipoOrden - [" + i + "]" +
-		 * Arrays.asList(req.getParameterValues("tipoOrden")).get(i));
-		 * System.out.println("nombreOrden - [" + i + "]" +
-		 * Arrays.asList(req.getParameterValues("nombreOrden")).get(i));
-		 * System.out.println("importeOrden - [" + i + "]" +
-		 * Arrays.asList(req.getParameterValues("importeOrden")).get(i));
-		 * System.out.println("cargoOrden - [" + i + "]" +
-		 * Arrays.asList(req.getParameterValues("cargoOrden")).get(i)); }
-		 */
+		return "redirect:../List/Pedidos";
+	}
+	
+	@PostMapping(value = "update")
+	public String updatePedidoVenta(HttpServletRequest req, HttpServletResponse resp) throws ParseException {
+		Long id = Long.valueOf(req.getParameter("pedidoVentaId"));
+		PedidoVenta pedidoVenta = pedidoVentaService.findPedidoVentaByID(id );
+		Double impTotal = Double.valueOf(req.getParameter("impTotal"));
+		Double descTotal = Double.valueOf(req.getParameter("descTotal"));
+		Long personaId = Long.valueOf(req.getParameter("persona"));
+		Long empresaId = Long.valueOf(req.getParameter("nombre"));
+		String fecha = req.getParameter("fecha");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss"); // Formateo para Java
+		Date date = sdf.parse(fecha + " 00:00:00"); // Crea el date de Java
+		java.sql.Date sqlDate = new java.sql.Date(date.getTime()); // Crea el date de SQL
+		String[] listTipoOrden = req.getParameterValues("tipoOrden");
+		String[] listNombreOrden = req.getParameterValues("nombreOrden");
+		String[] listImporteOrden = req.getParameterValues("importeOrden");
+		String[] listCargoOrden = req.getParameterValues("cargoOrden");
+		String cliente = getClienteNombre(personaId, empresaId);
+		Set<OrdenVenta> ordenes = getOrdenes(listTipoOrden, listNombreOrden, listImporteOrden, listCargoOrden);
+		pedidoVenta.setCliente(cliente);
+		pedidoVenta.setFecha(sqlDate);
+		pedidoVenta.setImporteTotal(impTotal);
+		pedidoVenta.setOrdenes(ordenes);
+		pedidoVenta.setTotalDescuentos(descTotal);
+		pedidoVenta = pedidoVentaService.saveOrUpdatePedidoVenta(pedidoVenta);
 		return "redirect:../List/Pedidos";
 	}
 
@@ -133,4 +143,29 @@ public class PedidoVentaController {
 		return value;
 	}
 
+	@PostMapping(value = "deleteMultiple")
+	public String deleteMultiplePedidos(HttpServletRequest req, HttpServletResponse resp) throws ParseException {
+		String idsParam = req.getParameter("ids");
+		if (!idsParam.trim().equals("")) {
+			String[] ids = idsParam.split(";");
+			ArrayList<Long> idsItem =  new ArrayList<Long>();
+			PedidoVenta p = null;
+			//Separo los ids de la lista
+			for (String id : ids) {
+				idsItem.clear();
+				p = pedidoVentaService.findPedidoVentaByID(Long.valueOf(id));
+				for (OrdenVenta o : p.getOrdenes()) {
+					 idsItem.add(o.getId());
+				}
+				//Delete pedido_venta y pedido_venta_ordenes
+				pedidoVentaService.deletePedidoVentaByID(Long.valueOf(id));
+				for (Long idItem : idsItem) {
+					//Delete orden_venta
+					ordenVentaService.deleteOrdenVentaByID(idItem);
+				}
+			}
+		}
+		return "redirect:../List/Pedidos";
+	}
+	
 }

@@ -47,7 +47,7 @@ $(document).ready(function() {
 
 	$('#razonsocial').on('change', function() {
 		var empresaid = $(this).val();
-		RefreshPersona(empresaid);
+		RefreshPersona(empresaid, "#persona");
 		//RefreshTicket(0);
 	})
 
@@ -77,19 +77,30 @@ $(document).ready(function() {
 		$(this).closest('.dropdown').find('.dropdown-toggle').html(htmlText);
 		$(this).html(btnText);
 		$('#cant-cargo-label').html(cargoLabel);
-		RefreshCargos(check);
-		RefreshPedidos(check); //0-productos 1-servicios
+		RefreshCargos(check, "#cargos");
+		RefreshPedidos(check, "#pedido"); //0-productos 1-servicios
 		$('#cantidadcargo').hide();
 		$('#cant-cargo-label').hide();
+		
+		//Modal Update
+		$('#cantidadCargoLabelEdit').html(cargoLabel);
+		RefreshCargos(check, "#cargosEdit");
+		RefreshPedidos(check, "#pedidoEdit"); //0-productos 1-servicios
+		$('#cantidadCargoEdit').hide();
+		$('#cantidadCargoLabelEdit').hide();
 	});
 
-	$('#cargos').change(function() {
+	$('#cargos, #cargosEdit').change(function() {
 		$('#cantidadcargo').hide();
 		$('#cant-cargo-label').hide();
+		$('#cantidadCargoEdit').hide();
+		$('#cantidadCargoLabelEdit').hide();
 		for (let i = 0; i < $(this)[0].options.length; i++) {
 			if (($(this)[0].options[i].text == 'Garantia' || $(this)[0].options[i].text == 'Soporte') && $(this)[0].options[i].selected) {
 				$('#cant-cargo-label').show();
 				$('#cantidadcargo').show();
+				$('#cantidadCargoLabelEdit').show();
+				$('#cantidadCargoEdit').show();
 			}
 		}
 	});
@@ -98,12 +109,18 @@ $(document).ready(function() {
 		$("#cantidad").val(1);
 	});
 
+	$("#confirmar").click(function(){
+		if ($("#tablaticket > tbody >tr").length === 0){
+			
+			$("#sinItemModal").modal("show");
+		}
+	})
 
 	//-------------------------------------------------------Inicializar------------------------------------------------------------------------------
-	RefreshEmpresa();
-	RefreshPersona(0);
-	RefreshPedidos(0);
-	RefreshCargos(0);
+	RefreshEmpresa('#razonsocial');
+	RefreshPersona(0, "#persona");
+	RefreshPedidos(0, "#pedido");
+	RefreshCargos(0, "#cargos");
 	$('#cantidadcargo').hide();
 	$('#cant-cargo-label').hide();
 	$('#tablaticket').on('click', 'button[type="button"]', function(e) {
@@ -112,7 +129,6 @@ $(document).ready(function() {
 			$('.contador')[i].innerHTML = i + 1;
 		}
 		checkDescuentosHistorico();
-		checkDescuentos();
 	})
 
 	$('.hiddentext').each(function(f) {
@@ -126,26 +142,10 @@ $(document).ready(function() {
 
 	$('.changeEstado').each(function(f) {
 		let btn = $(this);
-		if (btn.text() == "Anular") {
-			btn.closest("tr").css("text-decoration", "none")
-		} else {
-			btn.closest("tr").css("text-decoration", "line-through")
-		}
-
+		ChangeEstadoStyle(btn, btn.text() == "Anular");
 	});
 	$('.changeEstado').click(function() {
 		let pedidoVentaId = $(this).closest('td').find("input[name='pedidoVentaId']")[0].value;
-
-		/*$.ajax({
-			type: "GET",
-			url: "/pedidoventa/changeEstado/" + pedidoVentaId,
-			processData: false,
-			contentType: 'application/json',
-			//data: JSON.stringify(data),
-			success: function(r) {
-				console.log("actualizado")
-			}
-		});*/
 		let btn = $(this);
 		$.ajax({
 			url: "/PedidoVentaRest/changeEstado/" + pedidoVentaId,
@@ -154,51 +154,35 @@ $(document).ready(function() {
 			dataType: "json",
 			async: true,
 			success: function(data) {
-				/*$(this).closest("button.btn-outline-danger").hide();
-				$(this).closest("button.btn-outline-success").hide();*/
-				if (data.estado) {
-					btn.addClass("btn-outline-danger");
-					btn.removeClass("btn-outline-success");
-					btn.text("Anular")
-					btn.closest("tr").css("text-decoration", "none")
-					btn.closest("td").find("a").show()
-					//$(this).closest("button.btn-outline-danger").show();
-				} else {
-					btn.addClass("btn-outline-success");
-					btn.removeClass("btn-outline-danger");
-					btn.text("Activar")
-					btn.closest("tr").css("text-decoration", "line-through")
-					btn.closest("td").find("a").hide()
-					//$(this).closest("button.btn-outline-success").show();
-				}
+				ChangeEstadoStyle(btn, data.estado);
 			}
 		});
-	})
+	});
 });
 
-function RefreshCargos(check) {
-	$('#cargos').empty();
+function RefreshCargos(check, idSelect) {
+	$(idSelect).empty();
 	var href = "http://localhost:8080/ListRest/impuestos/" + check
 	$.get(href, function(cargos, status) {
 		for (var i = 0; i <= cargos.length - 1; i++) {
 			if (cargos[i].nombre == 'IVA' || cargos[i].nombre == 'IIBB') {
-				$('#cargos').append('<option selected disabled value="' + cargos[i].id + '" >' + cargos[i].nombre + '</option>');
+				$(idSelect).append('<option selected disabled value="' + cargos[i].id + '" >' + cargos[i].nombre + '</option>');
 			}
 			else {
-				$('#cargos').append('<option value="' + cargos[i].id + '" >' + cargos[i].nombre + '</option>');
+				$(idSelect).append('<option value="' + cargos[i].id + '" >' + cargos[i].nombre + '</option>');
 			}
-			$('#cargos').selectpicker('refresh');
+			$(idSelect).selectpicker('refresh');
 		}
 	})
 }
 
-function RefreshPersona(id) {
-	$('#persona').empty().append('<option value="" selected>-Seleccionar Persona-</option>');
+function RefreshPersona(id, selectId) {
+	$(selectId).empty().append('<option value="" selected>-Seleccionar Persona-</option>');
 	var href = "http://localhost:8080/ListRest/integrantes/" + id
 	$.get(href, function(personas, status) {
 		for (var i = 0; i <= personas.length - 1; i++) {
-			$('#persona').append('<option value="' + personas[i].id + '">' + personas[i].nombreFisico + '</option>');
-			$('#persona').selectpicker('refresh');
+			$(selectId).append('<option value="' + personas[i].id + '">' + personas[i].nombreFisico + '</option>');
+			$(selectId).selectpicker('refresh');
 		}
 	})
 }
@@ -272,13 +256,13 @@ function checkDescuentos() {
 
 }
 
-function RefreshEmpresa() {
-	$('#razonsocial').empty().append('<option value="0">-Sin Empresa-</option>');
+function RefreshEmpresa(idEmpresasSelect) {
+	$(idEmpresasSelect).empty().append('<option value="0">-Sin Empresa-</option>');
 	var href = "http://localhost:8080/ListRest/empresas"
 	$.get(href, function(empresas, status) {
 		for (var i = 0; i <= empresas.length - 1; i++) {
-			$('#razonsocial').append('<option value="' + empresas[i].id + '">' + empresas[i].razonSocial + '</option>');
-			$('#razonsocial').selectpicker('refresh');
+			$(idEmpresasSelect).append('<option value="' + empresas[i].id + '">' + empresas[i].razonSocial + '</option>');
+			$(idEmpresasSelect).selectpicker('refresh');
 		}
 	})
 }
@@ -301,26 +285,26 @@ function RefreshImportes(param) {
 	//})
 }
 
-function RefreshPedidos(check) {
-	$('#pedido').empty().append('<option value="" selected>-Seleccionar Producto/Servicio-</option>');
+function RefreshPedidos(check, idSelector) {
+	$(idSelector).empty().append('<option value="" selected>-Seleccionar Producto/Servicio-</option>');
 	var href = "http://localhost:8080/ListRest/pedidos/" + check
 	$.get(href, function(pedidos, status) {
 		for (var i = 0; i <= pedidos.length - 1; i++) {
-			$('#pedido').append('<option value="' + pedidos[i].id + '">' + pedidos[i].nombre + ' - ' + pedidos[i].precio + '</option > ');
-			$('#pedido').selectpicker('refresh');
+			$(idSelector).append('<option value="' + pedidos[i].id + '">' + pedidos[i].nombre + ' - ' + pedidos[i].precio + '</option > ');
+			$(idSelector).selectpicker('refresh');
 		}
 	})
 }
 
 function RefreshTicket(check) {
 	if (check === 1) {
-		RefreshEmpresa();
-		RefreshPersona(0);
+		RefreshEmpresa('#razonsocial');
+		RefreshPersona(0, "#persona");
 	}
 	$("#tablaticket tbody").empty();
 	$("#fecha").val("");
-	RefreshPedidos(0);
-	RefreshCargos(0);
+	RefreshPedidos(0, "#pedido");
+	RefreshCargos(0, "#cargos");
 	$('#cantidad').val("");
 	$('#cantidadcargo').val("");
 	let btnDropdown = $('.dropdown-menu button');
@@ -335,6 +319,28 @@ function RefreshTicket(check) {
 	$('#importe_final_label').html("Importe Final : 0");
 	$('#impTotal').val(0);
 	$('#descTotal').val(0);
+}
 
-
+function ChangeEstadoStyle(btn, check) {
+	if (check) {
+		btn.closest("tr").find("td:eq(1)").css("text-decoration", "none");
+		btn.closest("tr").find("td:eq(2)").css("text-decoration", "none");
+		btn.closest("tr").find("td:eq(3)").css("text-decoration", "none");
+		btn.closest("tr").find("td:eq(4)").css("text-decoration", "none");
+		btn.closest("div .dropdown-menu").find("a.dropdown-item.editarPedido").show();
+		btn.closest("tr").addClass("text-success");
+		btn.closest("tr").removeClass("text-danger");
+		btn.text("Anular");
+		btn.closest("div .btn-group").find("button").text("Activado");
+	} else {
+		btn.closest("tr").find("td:eq(1)").css("text-decoration", "line-through");
+		btn.closest("tr").find("td:eq(2)").css("text-decoration", "line-through");
+		btn.closest("tr").find("td:eq(3)").css("text-decoration", "line-through");
+		btn.closest("tr").find("td:eq(4)").css("text-decoration", "line-through");
+		btn.closest("div .dropdown-menu").find("a.dropdown-item.editarPedido").hide();
+		btn.closest("tr").addClass("text-danger");
+		btn.closest("tr").removeClass("text-success");
+		btn.text("Activar");
+		btn.closest("div .btn-group").find("button").text("Anulado");
+	}
 }

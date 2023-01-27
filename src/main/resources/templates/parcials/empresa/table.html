@@ -11,7 +11,7 @@
 					<a href="#addEmployeeModal" class="btn btn-success"
 						data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar
 							empresa</span></a> <a href="#deleteEmployeeModalMultiple"
-						class="btn btn-danger" data-toggle="modal"><i
+						class="btn btn-danger" id="deleteMultipleBtn" data-toggle="modal"><i
 						class="material-icons">&#xE15C;</i> <span>Borrar</span></a>
 				</div>
 			</div>
@@ -32,9 +32,9 @@
 			</thead>
 			<tbody>
 				<tr th:each="empresa: ${empresas}">
-					<td><span class="custom-checkbox"> <input
-							type="checkbox" id="checkbox1" name="options[]" value="1">
-							<label for="checkbox1"></label>
+					<td><span class="custom-checkbox"> <input class="checkBoxDelete"
+							type="checkbox" th:id="@{checkbox} + ${empresa.getId()}" name="options[]" th:value="${empresa.getId()}">
+							<label th:for="@{checkbox} + ${empresa.getId()}"></label>
 					</span></td>
 					<td th:text="${empresa.getFecha()}"></td>
 					<td th:text="${empresa.getRazonSocial()}"></td>

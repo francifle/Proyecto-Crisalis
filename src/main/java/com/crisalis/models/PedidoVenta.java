@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.crisalis.constants.UtilsConstants;
+import com.crisalis.repositories.PersonaRepository;
+import com.crisalis.services.PersonaService;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,6 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity(name = "PedidoVenta")
 @Table(name = "PedidoVenta")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class PedidoVenta extends GenericModel {
 
 	@Column(name = "nombre", nullable = false)
@@ -102,18 +106,31 @@ public class PedidoVenta extends GenericModel {
 
 	public Set<OrdenVenta> getOrdenesByTipo(Integer tipoOrden) {
 		Set<OrdenVenta> value = new HashSet<>();
-		for (OrdenVenta o: getOrdenes()) {
-			if(o.getTipo().equals(tipoOrden))
+		for (OrdenVenta o : getOrdenes()) {
+			if (o.getTipo().equals(tipoOrden))
 				value.add(o);
 		}
 		return value;
 	}
-	
+
 	public Set<OrdenVenta> getOrdenesProducto() {
 		return getOrdenesByTipo(UtilsConstants.TIPO_PRODUCTO);
 	}
-	
+
 	public Set<OrdenVenta> getOrdenesServicio() {
 		return getOrdenesByTipo(UtilsConstants.TIPO_SERVICIO);
 	}
+
+	/*public Long getPersonaId() {
+		String personaNombre = getCliente().split("//")[0].trim();
+		PersonaRepository personaRepository = null;
+		PersonaService personaService = new PersonaService(personaRepository);
+		for (Persona p : personaService.getAllPersonas()) {
+			if (p.getNombreCompleto().equals(personaNombre)) {
+				return p.getId();
+			}
+		}
+		return 0L;
+	}*/
+
 }

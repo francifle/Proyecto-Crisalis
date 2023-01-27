@@ -30,8 +30,8 @@
 			<tbody>
 				<tr th:each="persona: ${personas}">
 					<td><span class="custom-checkbox"> <input
-							type="checkbox" id="checkbox1" name="options[]" value="1">
-							<label for="checkbox1"></label>
+							type="checkbox" th:id="@{checkbox} + ${persona.getId()}" name="options[]" th:value="${persona.getId()}">
+							<label th:for="@{checkbox} + ${persona.getId()}"></label>
 					</span></td>
 					<td th:text="${persona.getNombreCompleto()}"></td>
 					<td th:text="${persona.getDni()}" class="dni"></td>

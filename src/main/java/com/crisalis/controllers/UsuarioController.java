@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.crisalis.models.Usuario;
 import com.crisalis.models.dto.UserDTO;
 import com.crisalis.services.UsuarioService;
 import com.crisalis.utils.Encrypter;
@@ -32,7 +31,7 @@ public class UsuarioController {
 		pass = Encrypter.hash(pass);
 		String username = req.getParameter("username");
 		UserDTO userDTO = new UserDTO(username, pass, nombre);
-		Usuario newUser = usuarioService.saveUser(userDTO);
+		usuarioService.saveUser(userDTO);
 		return "index";
 	}
 	

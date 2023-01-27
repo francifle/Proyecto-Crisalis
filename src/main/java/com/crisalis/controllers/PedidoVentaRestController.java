@@ -56,7 +56,12 @@ public class PedidoVentaRestController {
 		this.servicioService = servicioService;
 		this.pedidoService = pedidoService;
 	}
-
+	
+	@GetMapping(value = "getPedidoVenta/{id}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public PedidoVenta getPedidoVenta(@PathVariable Long id) {
+		return pedidoVentaService.findPedidoVentaByID(id);
+	}
+	
 	@GetMapping(value = "changeEstado/{id}")
 	public PedidoVenta updateEstado(@PathVariable Long id) {
 		PedidoVenta pedidoVenta = pedidoVentaService.findPedidoVentaByID(id);

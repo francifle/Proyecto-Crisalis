@@ -2,6 +2,7 @@ package com.crisalis.controllers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.crisalis.models.Empresa;
+import com.crisalis.models.OrdenVenta;
+import com.crisalis.models.PedidoVenta;
 import com.crisalis.models.Persona;
 import com.crisalis.services.EmpresaService;
 import com.crisalis.services.PersonaService;
@@ -86,6 +89,18 @@ public class EmpresaController {
 		updatedEmpresa.setCuit(String.valueOf(cuit));
 		updatedEmpresa.setIntegrantes(personas);
 		updatedEmpresa = this.empresaService.saveOrUpdateEmpresa(updatedEmpresa);
+		return "redirect:../List/Empresas";
+	}
+	
+	@PostMapping(value = "deleteMultiple")
+	public String deleteMultipleEmpresas(HttpServletRequest req, HttpServletResponse resp) throws ParseException {
+		String idsParam = req.getParameter("ids");
+		if (!idsParam.trim().equals("")) {
+			String[] ids = idsParam.split(";");
+			for (String id : ids) {				
+				this.empresaService.deleteEmpresaByID(Long.valueOf(id));
+			}
+		}
 		return "redirect:../List/Empresas";
 	}
 	
