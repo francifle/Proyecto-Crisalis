@@ -26,10 +26,10 @@ public class UsuarioController {
 	
 	@PostMapping(value = "")
 	public String saveUsuario(HttpServletRequest req, HttpServletResponse resp) {
-		String nombre = req.getParameter("nombre");
-		String pass = req.getParameter("pass");
+		String nombre = req.getParameter("new-nombre");
+		String pass = req.getParameter("new-pass");
 		pass = Encrypter.hash(pass);
-		String username = req.getParameter("username");
+		String username = req.getParameter("new-username");
 		UserDTO userDTO = new UserDTO(username, pass, nombre);
 		usuarioService.saveUser(userDTO);
 		return "index";

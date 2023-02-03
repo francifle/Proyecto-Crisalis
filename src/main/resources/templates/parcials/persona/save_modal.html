@@ -1,7 +1,7 @@
 <div id="addEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="/persona/save" method="POST">
+			<form action="/persona/save" method="POST" id="personaForm">
 				<div class="modal-header">
 					<h4 class="modal-title">Agregar Persona</h4>
 					<button type="button" class="close" data-dismiss="modal"
@@ -10,22 +10,22 @@
 				<div class="modal-body">
 					<div class="form-group">
 						<label>Nombre</label> <input name="nombre" type="text"
-							class="form-control" required placeholder="Ej: Francisco">
+							class="form-control" placeholder="Ej: Francisco" id="nombreModal">
 					</div>
 					<div class="form-group">
 						<label>Apellido</label> <input name="apellido" type="text"
-							class="form-control"  required placeholder="Ej: Fleytas">
+							class="form-control"  placeholder="Ej: Fleytas" id="apellidoModal">
 					</div>
 					<div class="form-group">
 						<label>DNI</label> <input name="dni" type="text"
-							id="intTextBox" class="form-control" required
+							id="dniModal" class="form-control" 
 							placeholder="Ej: 12345678" maxlength="8">
 					</div>
 				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal"
-						value="Cancelar "> <input type="submit"
-						class="btn btn-success" value="Agregar">
+						value="Cancelar "> <input type="button"
+						class="btn btn-success" value="Agregar" id="agregarPersona">
 				</div>
 			</form>
 		</div>

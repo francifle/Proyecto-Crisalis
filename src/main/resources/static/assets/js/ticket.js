@@ -35,6 +35,7 @@ $(document).ready(function() {
 				'<input type="hidden" name="importeOrden" value="' + importe + '" >' +
 				'<input type="hidden" name="cargoOrden" value="' + cargos + '" >' +
 				'</tr>');
+			ChangeColorBtnConfirmar()
 			checkDescuentos();
 			/*var $demo1 = $('tabla');
 			$demo1.floatThead({
@@ -81,7 +82,7 @@ $(document).ready(function() {
 		RefreshPedidos(check, "#pedido"); //0-productos 1-servicios
 		$('#cantidadcargo').hide();
 		$('#cant-cargo-label').hide();
-		
+
 		//Modal Update
 		$('#cantidadCargoLabelEdit').html(cargoLabel);
 		RefreshCargos(check, "#cargosEdit");
@@ -109,14 +110,8 @@ $(document).ready(function() {
 		$("#cantidad").val(1);
 	});
 
-	$("#confirmar").click(function(){
-		if ($("#tablaticket > tbody >tr").length === 0){
-			
-			$("#sinItemModal").modal("show");
-		}
-	})
-
 	//-------------------------------------------------------Inicializar------------------------------------------------------------------------------
+	ChangeColorBtnConfirmar();
 	RefreshEmpresa('#razonsocial');
 	RefreshPersona(0, "#persona");
 	RefreshPedidos(0, "#pedido");
@@ -129,6 +124,7 @@ $(document).ready(function() {
 			$('.contador')[i].innerHTML = i + 1;
 		}
 		checkDescuentosHistorico();
+		ChangeColorBtnConfirmar()
 	})
 
 	$('.hiddentext').each(function(f) {
@@ -341,6 +337,16 @@ function ChangeEstadoStyle(btn, check) {
 		btn.closest("tr").addClass("text-danger");
 		btn.closest("tr").removeClass("text-success");
 		btn.text("Activar");
-		btn.closest("div .btn-group").find("button").text("Anulado");
+		btn.closest().find("button").text("Anulado");
+	}
+}
+
+function ChangeColorBtnConfirmar() {
+	if ($("#tablaticket > tbody >tr").length === 0) {
+		$("#confirmar").removeClass("btn-success");
+		$("#confirmar").addClass("btn-danger");
+	} else {
+		$("#confirmar").removeClass("btn-danger");
+		$("#confirmar").addClass("btn-success");
 	}
 }

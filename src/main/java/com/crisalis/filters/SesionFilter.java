@@ -36,6 +36,8 @@ public class SesionFilter implements Filter {
 	public boolean checkURI(String URI) {
 		if (URI.contains("assets"))
 			return false;
+		if (URI.contains("LoginRest"))
+			return false;
 		if (URI.equals("/home")) 
 			return false;
 		if (URI.equals("/register"))

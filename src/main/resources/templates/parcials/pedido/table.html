@@ -42,8 +42,6 @@
 					<td th:text="${pedido.getNombre()}"></td>
 					<td th:text="${pedido.getCliente()}" class="hiddentext"></td>
 					<td th:text="${pedido.getImporteFinal()}"></td>
-					<!-- 					<td><button type="button" -->
-					<!-- 							class="btn btn-outline-secondary btn-sm">Ver más</button></td> -->
 					<td><a th:href="@{#ordenModal}+${pedido.getId()}"
 						class="btn btn-outline-secondary btn-sm" data-toggle="modal">Ver
 							más</a></td>
@@ -65,18 +63,6 @@
 							</div>
 						</div>
 					</td>
-
-					<!-- 					<td><a th:href="@{#editEmployeeModal}+${pedido.getId()}" -->
-					<!-- 						class="edit" data-toggle="modal"><i class="material-icons" -->
-					<!-- 							title="Edit">&#xE254;</i></a> <a -->
-					<!-- 						th:href="@{#deleteEmployeeModal}+${pedido.getId()}" class="delete" -->
-					<!-- 						data-toggle="modal"><i class="material-icons" title="Delete">&#xE872;</i></a></td> -->
-					<!-- 					Edit Modal HTML -->
-					<!-- 					<div th:replace="@{parcials/pedido/edit_modal}"></div> -->
-					<!-- 					Delete Modal HTML -->
-					<!-- 					<div th:replace="@{parcials/pedido/delete_modal}"></div> -->
-					<!-- 					Members Modal HTML -->
-					<!-- 					<div th:replace="@{parcials/pedido/list_pedido_modal}"></div> -->
 				</tr>
 			</tbody>
 		</table>
@@ -86,6 +72,10 @@
 	<div th:replace="@{parcials/pedido/save_modal}"></div>
 	<!-- Edit Modal HTML -->
 	<div th:replace="@{parcials/pedido/edit_modal}"></div>
-	<!-- Error Modal HTML -->
+	<!-- Error Producto/Servico Modal HTML -->
 	<div th:replace="@{parcials/pedido/sin_item_modal}"></div>
+	<!-- Error Persona Modal HTML -->
+	<div th:replace="@{parcials/pedido/sin_persona_modal}"></div>
+	<!-- Error Fecha Modal HTML -->
+	<div th:replace="@{parcials/pedido/sin_fecha_modal}"></div>
 </div>

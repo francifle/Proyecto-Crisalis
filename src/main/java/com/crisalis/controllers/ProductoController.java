@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.crisalis.constants.UtilsConstants;
 import com.crisalis.models.Pedido;
 import com.crisalis.models.Producto;
+import com.crisalis.services.PedidoService;
 import com.crisalis.services.ProductoService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,9 +24,12 @@ public class ProductoController {
 	
 	@Autowired
 	private final ProductoService productoService;
+	@Autowired
+	private final PedidoService pedidoService;
 	
-	public ProductoController(ProductoService productoService) {
+	public ProductoController(ProductoService productoService, PedidoService pedidoService) {
 		this.productoService = productoService;
+		this.pedidoService = pedidoService;
 	}
 
 	@PostMapping(value = "save")
@@ -51,7 +55,10 @@ public class ProductoController {
 	@PostMapping(value = "delete")
 	public String deleteProducto(HttpServletRequest req, HttpServletResponse resp) throws ParseException {
 		String id = req.getParameter("productoId");
+		Producto p = this.productoService.findProductoByID(Long.valueOf(id));
+		Long pedidoId = p.getPedido().getId();
 		this.productoService.deleteProductoByID(Long.valueOf(id));
+		this.pedidoService.deletePedidoByID(pedidoId);
 		return "redirect:../List/Productos";
 	}
 	
@@ -67,6 +74,21 @@ public class ProductoController {
 		updatedProducto.getPedido().setFecha(sqlDate);
 		updatedProducto.getPedido().setPrecio(Integer.valueOf(precio));
 		updatedProducto = this.productoService.saveOrUpdateProducto(updatedProducto);
+		return "redirect:../List/Productos";
+	}
+	
+	@PostMapping(value = "deleteMultiple")
+	public String deleteMultipleProductos(HttpServletRequest req, HttpServletResponse resp) throws ParseException {
+		String idsParam = req.getParameter("ids");
+		if (!idsParam.trim().equals("")) {
+			String[] ids = idsParam.split(";");
+			for (String id : ids) {
+				Producto p = this.productoService.findProductoByID(Long.valueOf(id));
+				Long pedidoId = p.getPedido().getId();
+				this.productoService.deleteProductoByID(Long.valueOf(id));
+				this.pedidoService.deletePedidoByID(pedidoId);
+			}
+		}
 		return "redirect:../List/Productos";
 	}
 	

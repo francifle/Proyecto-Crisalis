@@ -33,6 +33,7 @@ $(document).ready(function() {
 				'<input type="hidden" name="importeOrden" value="' + importe + '" >' +
 				'<input type="hidden" name="cargoOrden" value="' + cargos + '" >' +
 				'</tr>');
+			ChangeColorBtnEditConfirmar()
 			checkDescuentosEdit();
 		}
 	});
@@ -58,6 +59,7 @@ $(document).ready(function() {
 		for (var i = 0; i < $('.contadorEdit').length; i++) {
 			$('.contadorEdit')[i].innerHTML = i + 1;
 		}
+		ChangeColorBtnEditConfirmar()
 		checkDescuentosHistoricoEdit();
 	})
 
@@ -70,16 +72,9 @@ $(document).ready(function() {
 	$('#btnCancelarEdit').on('click', function() {
 		RefreshTicketEdit(1);
 	})
-
-	$("#confirmarEdit").click(function(){
-		if ($("#tablaticketEdit > tbody >tr").length !== 0){
-			$('#formEdit').submit();
-		} else{
-			$("#sinItemModal").modal("show");
-		}
-	})
-
+	
 	//-------------------------------------------------------Inicializar------------------------------------------------------------------------------
+	ChangeColorBtnEditConfirmar()
 	RefreshEmpresa('#razonSocialEdit');
 	RefreshPersona(0, "#personaEdit");
 	RefreshPedidos(0, "#pedidoEdit");
@@ -132,7 +127,9 @@ function checkDescuentosEdit() {
 	$('#importeFinalEdit').html(textImporteFinal + sumImporteFinal);
 	$('#impTotalEdit').val(sumImporteTotal);
 	$('#descTotalEdit').val(sumDescuentoTotal);
+	ChangeColorBtnEditConfirmar()
 }
+
 
 function checkDescuentosHistoricoEdit() {
 	let persona = $("#personaEdit").val();
@@ -213,9 +210,9 @@ function LoadEditModal(id) {
 		for (var i = 0; i < pedido.ordenes.length; i++) {
 			orden = pedido.ordenes[i];
 			contador = $('#tablaticketEdit >tbody >tr').length + 1;
-			if (orden.tipo === 1){
+			if (orden.tipo === 1) {
 				tipo = "Producto";
-			}else{
+			} else {
 				tipo = "Servicio";
 			}
 			$("#tablaticketEdit").last().append('<tr>' +
@@ -249,3 +246,12 @@ function getClienteId(selectId, nombre) {
 	return 0;
 }
 
+function ChangeColorBtnEditConfirmar() {
+	if ($("#tablaticketEdit > tbody >tr").length === 0) {
+		$("#confirmarEdit").removeClass("btn-success");
+		$("#confirmarEdit").addClass("btn-danger");
+	} else {
+		$("#confirmarEdit").removeClass("btn-danger");
+		$("#confirmarEdit").addClass("btn-success");
+	}
+}

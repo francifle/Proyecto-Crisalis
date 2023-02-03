@@ -51,7 +51,7 @@ public class EmpresaController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss"); //Formateo para Java
 		Date date = sdf.parse(fecha + " 00:00:00"); //Crea el date de Java
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime()); //Crea el date de SQL
-		Empresa newEmpresa = new Empresa();
+		Empresa newEmpresa = new Empresa(); //Se realiza una instancia vacia del objeto
 		newEmpresa.setFecha(sqlDate);
 		newEmpresa.setRazonSocial(razonsocial);
 		newEmpresa.setCuit(cuit);

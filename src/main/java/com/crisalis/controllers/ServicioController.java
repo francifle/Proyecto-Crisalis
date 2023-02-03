@@ -17,6 +17,7 @@ import com.crisalis.models.Impuesto;
 import com.crisalis.models.Pedido;
 import com.crisalis.models.Servicio;
 import com.crisalis.services.ImpuestoService;
+import com.crisalis.services.PedidoService;
 import com.crisalis.services.ServicioService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,12 +29,15 @@ public class ServicioController {
 
 	@Autowired
 	private final ServicioService servicioService;
-	
+	@Autowired
 	private final ImpuestoService impuestoService;
+	@Autowired
+	private final PedidoService pedidoService;
 	
-	public ServicioController(ServicioService servicioService, ImpuestoService impuestoService) {
+	public ServicioController(ServicioService servicioService, ImpuestoService impuestoService, PedidoService pedidoService) {
 		this.servicioService = servicioService;
 		this.impuestoService = impuestoService;
+		this.pedidoService = pedidoService;
 	}
 	
 	@PostMapping(value = "save")
@@ -61,7 +65,10 @@ public class ServicioController {
 	@PostMapping(value = "delete")
 	public String deleteProducto(HttpServletRequest req, HttpServletResponse resp) throws ParseException {
 		String id = req.getParameter("productoId");
+		Servicio s = this.servicioService.findServicioByID(Long.valueOf(id));
+		Long pedidoId = s.getPedido().getId();
 		this.servicioService.deleteServicioByID(Long.valueOf(id));
+		this.pedidoService.deletePedidoByID(pedidoId);
 		return "redirect:../List/Servicios";
 	}
 	
@@ -84,6 +91,21 @@ public class ServicioController {
 		updatedServicio.getPedido().setPrecio(Integer.valueOf(precio));
 		updatedServicio.getPedido().setImpuestos(impuestos);
 		updatedServicio = this.servicioService.saveOrUpdateServicio(updatedServicio);
+		return "redirect:../List/Servicios";
+	}
+	
+	@PostMapping(value = "deleteMultiple")
+	public String deleteMultipleServicios(HttpServletRequest req, HttpServletResponse resp) throws ParseException {
+		String idsParam = req.getParameter("ids");
+		if (!idsParam.trim().equals("")) {
+			String[] ids = idsParam.split(";");
+			for (String id : ids) {
+				Servicio s = this.servicioService.findServicioByID(Long.valueOf(id));
+				Long pedidoId = s.getPedido().getId();
+				this.servicioService.deleteServicioByID(Long.valueOf(id));
+				this.pedidoService.deletePedidoByID(pedidoId);
+			}
+		}
 		return "redirect:../List/Servicios";
 	}
 	

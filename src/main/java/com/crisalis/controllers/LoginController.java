@@ -17,7 +17,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("")
-
 public class LoginController {
 
 	@Autowired
@@ -62,6 +61,6 @@ public class LoginController {
 
 		}
 
-		return "loginerror";
+		return "index";
 	}
 }

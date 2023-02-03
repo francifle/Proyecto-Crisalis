@@ -1,20 +1,25 @@
 <div id="deleteEmployeeModalMultiple" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form>
-        <div class="modal-header">
-          <h4 class="modal-title">Borrar los registros seleccionados</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p>¿Está seguro de que desea eliminar estos registros?</p>
-          <p class="text-warning"><small>Esta acción no puede deshacerse.</small></p>
-        </div>
-        <div class="modal-footer">
-          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-danger" value="Delete">
-        </div>
-      </form>
-    </div>
-  </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form action="/producto/deleteMultiple" method="POST">
+				<div class="modal-header">
+					<h4 class="modal-title">Borrar los registros seleccionados</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<p>¿Está seguro de que desea eliminar estos registros?</p>
+					<p class="text-warning">
+						<small>Esta acción no puede deshacerse.</small>
+					</p>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal"
+						value="Cancel"> <input type="submit"
+						class="btn btn-danger" value="Delete"> <input
+						type="hidden" name="ids" id="deleteIds">
+				</div>
+			</form>
+		</div>
+	</div>
 </div>

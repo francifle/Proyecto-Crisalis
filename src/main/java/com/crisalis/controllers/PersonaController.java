@@ -58,4 +58,16 @@ public class PersonaController {
 		return "redirect:../List/Personas";
 	}
 	
+	@PostMapping(value = "deleteMultiple")
+	public String deleteMultiplePersonas(HttpServletRequest req, HttpServletResponse resp) throws ParseException {
+		String idsParam = req.getParameter("ids");
+		if (!idsParam.trim().equals("")) {
+			String[] ids = idsParam.split(";");
+			for (String id : ids) {				
+				this.personaService.deletePersonaByID(Long.valueOf(id));
+			}
+		}
+		return "redirect:../List/Personas";
+	}
+	
 }

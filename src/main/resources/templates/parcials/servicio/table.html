@@ -11,7 +11,7 @@
 					<a href="#addEmployeeModal" class="btn btn-success"
 						data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar
 							servicio</span></a> <a href="#deleteEmployeeModalMultiple"
-						class="btn btn-danger" data-toggle="modal"><i
+						class="btn btn-danger" id="deleteMultipleBtn" data-toggle="modal"><i
 						class="material-icons">&#xE15C;</i> <span>Borrar</span></a>
 				</div>
 			</div>
@@ -31,7 +31,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="servicio: ${servicios}">
-					<td><span class="custom-checkbox"> <input
+					<td><span class="custom-checkbox"> <input class="checkBoxDelete"
 							type="checkbox" th:id="@{checkbox} + ${servicio.getId()}" name="options[]" th:value="${servicio.getId()}">
 							<label th:for="@{checkbox} + ${servicio.getId()}"></label>
 					</span></td>
@@ -56,4 +56,6 @@
 	<div th:replace="@{parcials/servicio/delete_multiple}"></div>
 	<!-- Edit Modal HTML -->
 	<div th:replace="@{parcials/servicio/save_modal}"></div>
+	<!-- Sin Datos Modal HTML -->
+	<div th:replace="@{parcials/servicio/sin_datos_modal}"></div>
 </div>

@@ -1,65 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="assets/img/isotipo_finneg.png">
-  <title>Crisalis</title>
-  <style th:replace="@{parcials/admin_styles}"></style>
-  <link rel="stylesheet" th:href="@{../assets/css/crud_table.css}">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" th:href="@{../assets/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
-  <!--<link rel="stylesheet" th:href="@{../assets/bootstrap-datepicker/css/bootstrap-datepicker.css}">-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="assets/img/isotipo_finneg.png">
+<title>Crisalis</title>
+<style th:replace="@{parcials/admin_styles}"></style>
+<link rel="stylesheet" th:href="@{../assets/css/crud_table.css}">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	th:href="@{../assets/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+<!--<link rel="stylesheet" th:href="@{../assets/bootstrap-datepicker/css/bootstrap-datepicker.css}">-->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+	<div class="wrapper">
 
-  <!-- Preloader -->
-  <div th:replace="@{parcials/admin_preloader}"></div>
+		<!-- Preloader -->
+		<div th:replace="@{parcials/admin_preloader}"></div>
 
-  <!-- Navbar -->
-  <div th:replace="@{parcials/admin_navbar}"></div>
+		<!-- Navbar -->
+		<div th:replace="@{parcials/admin_navbar}"></div>
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="#" class="brand-link">
-      <img th:src="@{../assets/AdminLTE/dist/img/isotipo_finneg.png}" alt="Finnegans Logo" class="brand-image pt-2 " style="opacity: .8">
-      <span class="brand-text font-weight-light justify-content-center">Crisalis</span>
-    </a>
+		<!-- Main Sidebar Container -->
+		<aside class="main-sidebar sidebar-dark-primary elevation-4">
+			<!-- Brand Logo -->
+			<a href="#" class="brand-link"> <img
+				th:src="@{../assets/AdminLTE/dist/img/isotipo_finneg.png}"
+				alt="Finnegans Logo" class="brand-image pt-2 " style="opacity: .8">
+				<span class="brand-text font-weight-light justify-content-center">Crisalis</span>
+			</a>
 
-    <!-- Sidebar -->
-    <div th:replace="@{parcials/admin_sidebar}"></div>
-  </aside>
+			<!-- Sidebar -->
+			<div th:replace="@{parcials/admin_sidebar}"></div>
+		</aside>
 
-    <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content">
-        <div class="row">
-          <div th:replace="@{parcials/producto/table}"></div>
-        </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-    <!-- Control Sidebar -->
-    <div th:replace="@{parcials/admin_controlsidebar}"></div>
-    <!-- /.control-sidebar -->
-  </div>
-    <!-- Main Footer -->
-  <footer th:replace="@{parcials/admin_footer}"></footer>
-</div>
-<!-- ./wrapper -->
-<!-- Scripts -->
-    <div th:replace="@{parcials/admin_scripts}"></div>
-    <script defer th:src="@{../assets/js/crud_table.js}"></script>
-    <script defer th:src="@{../assets/AdminLTE/plugins/datatables/jquery.dataTables.js}"></script>
-    <script defer th:src="@{../assets/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
-    <script defer th:src="@{../assets/js/datatable.js}"></script>
-    <!--<script defer th:src="@{../assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content">
+				<div class="row">
+					<div th:replace="@{parcials/producto/table}"></div>
+				</div>
+				<!-- /.row -->
+			</section>
+			<!-- /.content -->
+			<!-- Control Sidebar -->
+			<div th:replace="@{parcials/admin_controlsidebar}"></div>
+			<!-- /.control-sidebar -->
+		</div>
+		<!-- Main Footer -->
+		<footer th:replace="@{parcials/admin_footer}"></footer>
+	</div>
+	<!-- ./wrapper -->
+	<!-- Scripts -->
+	<div th:replace="@{parcials/admin_scripts}"></div>
+	<script defer th:src="@{../assets/js/crud_table.js}"></script>
+	<script defer
+		th:src="@{../assets/AdminLTE/plugins/datatables/jquery.dataTables.js}"></script>
+	<script defer
+		th:src="@{../assets/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+	<script defer th:src="@{../assets/js/datatable.js}"></script>
+	<!--<script defer th:src="@{../assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
     <script defer th:src="@{../assets/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js}"></script>
     <script defer th:src="@{../assets/js/datepicker.js}"></script>-->
-    <script defer th:src="@{../assets/js/onlynumber.js}"></script>
+	<script defer th:src="@{../assets/js/onlynumber.js}"></script>
+	<script defer th:src="@{../assets/js/delete_multiple.js}"></script>
+	<script defer th:src="@{../assets/js/modal_event.js}"></script>
 </body>
 </html>

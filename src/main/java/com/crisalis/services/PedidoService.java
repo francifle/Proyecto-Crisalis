@@ -29,6 +29,11 @@ public class PedidoService {
 		return this.pedidoRepository.findAll();
 	}
 
+	public void deletePedidoByID(Long id) {
+		this.pedidoRepository.delete(findPedidoByID(id));
+
+	}
+	
 	public Pedido findPedidoByID(Long id) {
 		return this.pedidoRepository.getReferenceById(id);
 	}
