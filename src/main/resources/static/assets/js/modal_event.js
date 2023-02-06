@@ -1,4 +1,4 @@
-$(document).ready(function() {
+//$(document).ready(function() {
 	$("#confirmar").click(function() {
 		let check = true;
 		if ($("#persona").val() == "") {
@@ -108,7 +108,7 @@ $(document).ready(function() {
 
 	$("#agregarPersona").click(function() {
 		let check = true;
-		if ($("#nombreModal").val() == "" || $("#dniModal").val() == "" || $("#apellidoModal").val() == ""){
+		if ($("#nombreModal").val() == "" || $("#dniModal").val() == "" || $("#apellidoModal").val() == "") {
 			$("#sinDatosModal").modal("show");
 			check = false;
 		}
@@ -143,9 +143,13 @@ $(document).ready(function() {
 
 	$("#agregarUsuario").click(function() {
 		let check = true;
-		if ($("#new-nombre").val() == "" || $("#new-username").val() == "" || $("#new-pass").val() == ""){
+		let mailformat = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
+		if ($("#new-nombre").val() == "" || $("#new-username").val() == "" || $("#new-pass").val() == "") {
 			$("#sinDatosModal").modal("show");
 			check = false;
+		} else if ($("#new-username").val().match(mailformat) == null) {
+			alert("email no valido")
+			check = false
 		}
 		if (check) {
 			$('#usuarioForm').submit();
@@ -207,4 +211,4 @@ $(document).ready(function() {
 	$("#registerModal1").click(function() {
 		($("#registerModal").modal("show"))
 	})
-})
+//})

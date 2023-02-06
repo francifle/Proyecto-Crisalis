@@ -50,9 +50,7 @@ public class LoginController {
 		Usuario user = new Usuario();
 		user.setMail(mail);
 		user.setPass(pass);
-		System.out.println(Encrypter.hash(pass));
 		ArrayList<Usuario> list = (ArrayList<Usuario>) usuarioRepository.findAll();
-		System.out.println(user);
 		for (int i = 0; i < list.size(); i++) {
 			if (user.equals(list.get(i))) {
 				req.getSession().setAttribute("usuario", list.get(i));

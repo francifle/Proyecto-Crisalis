@@ -63,12 +63,6 @@ $(document).ready(function() {
 		checkDescuentosHistoricoEdit();
 	})
 
-	$('.editarPedido').click(function() {
-		let pedidoId = $(this).closest('td').find("input[name='pedidoVentaId']")[0].value;
-		LoadEditModal(pedidoId);
-		$("#editPedidoModal").modal("show");
-	});
-
 	$('#btnCancelarEdit').on('click', function() {
 		RefreshTicketEdit(1);
 	})
@@ -82,6 +76,13 @@ $(document).ready(function() {
 	$('#cantidadCargoEdit').hide();
 	$('#cantidadCargoLabelEdit').hide();
 });
+
+$('.editarPedido').click(function() {
+		let pedidoId = $(this).closest('td').find("input[name='pedidoVentaId']")[0].value;
+		LoadEditModal(pedidoId);
+		$("#editPedidoModal").modal("show");
+	});
+
 
 //CheckDescuentosEdit
 function checkDescuentosEdit() {

@@ -126,35 +126,33 @@ $(document).ready(function() {
 		checkDescuentosHistorico();
 		ChangeColorBtnConfirmar()
 	})
+});
 
-	$('.hiddentext').each(function(f) {
-
-		var newstr = $(this).text().substring(0, 37);
-		if ($(this).text().length > 37)
-			newstr += "..."
-		$(this).text(newstr);
-
+$('.changeEstado').each(function(f) {
+	let btn = $(this);
+	ChangeEstadoStyle(btn, btn.text() == "Anular");
+});
+$('.changeEstado').click(function() {
+	let pedidoVentaId = $(this).closest('td').find("input[name='pedidoVentaId']")[0].value;
+	let btn = $(this);
+	$.ajax({
+		url: "/PedidoVentaRest/changeEstado/" + pedidoVentaId,
+		type: "GET",
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		async: true,
+		success: function(data) {
+			ChangeEstadoStyle(btn, data.estado);
+		}
 	});
+});
 
-	$('.changeEstado').each(function(f) {
-		let btn = $(this);
-		ChangeEstadoStyle(btn, btn.text() == "Anular");
-	});
-	$('.changeEstado').click(function() {
-		let pedidoVentaId = $(this).closest('td').find("input[name='pedidoVentaId']")[0].value;
-		let btn = $(this);
-		$.ajax({
-			url: "/PedidoVentaRest/changeEstado/" + pedidoVentaId,
-			type: "GET",
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			async: true,
-			success: function(data) {
-				ChangeEstadoStyle(btn, data.estado);
-			}
-		});
-	});
-	
+$('.hiddentext').each(function(f) {
+	var newstr = $(this).text().substring(0, 37);
+	if ($(this).text().length > 37)
+		newstr += "..."
+	$(this).text(newstr);
+
 });
 
 function RefreshCargos(check, idSelect) {
@@ -179,9 +177,9 @@ function RefreshPersona(id, selectId) {
 	var href = "http://localhost:8080/ListRest/integrantes/" + id
 	$.get(href, function(personas, status) {
 		for (var i = 0; i <= personas.length - 1; i++) {
-			if (personas[i].estado){
-			$(selectId).append('<option value="' + personas[i].id + '">' + personas[i].nombreFisico + '</option>');
-			$(selectId).selectpicker('refresh');
+			if (personas[i].estado) {
+				$(selectId).append('<option value="' + personas[i].id + '">' + personas[i].nombreFisico + '</option>');
+				$(selectId).selectpicker('refresh');
 			}
 		}
 	})
