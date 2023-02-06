@@ -1,4 +1,4 @@
-<div class="container tablaProducto">
+<div class="tablaProducto">
 	<div class="table-wrapper">
 		<div class="table-title">
 			<div class="row">
@@ -26,7 +26,6 @@
 					<th>Razon Social</th>
 					<th>Integrantes</th>
 					<th>Cuit</th>
-					<th>Pedidos</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -41,7 +40,6 @@
 					<td><a th:href="@{#integrantesModal}+${empresa.getId()}"
 						class="btn btn-outline-dark btn-sm" data-toggle="modal">Ver más</a></td>
 					<td th:text="${empresa.getCuit()}" class="cuit"></td>
-					<td><button type="button" class="btn btn-outline-dark">Ver más</button></td>
 					<td><a th:href="@{#editEmployeeModal}+${empresa.getId()}"
 						class="edit" data-toggle="modal"><i class="material-icons"
 							 title="Edit">&#xE254;</i></a> <a

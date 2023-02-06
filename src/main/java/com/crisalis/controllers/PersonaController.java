@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.crisalis.constants.UtilsConstants;
 import com.crisalis.models.Persona;
 import com.crisalis.services.PersonaService;
 
@@ -33,6 +34,7 @@ public class PersonaController {
 		newPersona.setNombre(nombre);
 		newPersona.setApellido(apellido);
 		newPersona.setDni(dni);
+		newPersona.setEstado(UtilsConstants.ESTADO_ACTIVO);
 		newPersona = this.personaService.saveOrUpdatePersona(newPersona);
 		return "redirect:../List/Personas";
 	}

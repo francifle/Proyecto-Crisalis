@@ -154,6 +154,7 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
 });
 
 function RefreshCargos(check, idSelect) {
@@ -174,11 +175,14 @@ function RefreshCargos(check, idSelect) {
 
 function RefreshPersona(id, selectId) {
 	$(selectId).empty().append('<option value="" selected>-Seleccionar Persona-</option>');
+	$(selectId).selectpicker('refresh');
 	var href = "http://localhost:8080/ListRest/integrantes/" + id
 	$.get(href, function(personas, status) {
 		for (var i = 0; i <= personas.length - 1; i++) {
+			if (personas[i].estado){
 			$(selectId).append('<option value="' + personas[i].id + '">' + personas[i].nombreFisico + '</option>');
 			$(selectId).selectpicker('refresh');
+			}
 		}
 	})
 }
@@ -337,7 +341,7 @@ function ChangeEstadoStyle(btn, check) {
 		btn.closest("tr").addClass("text-danger");
 		btn.closest("tr").removeClass("text-success");
 		btn.text("Activar");
-		btn.closest().find("button").text("Anulado");
+		btn.closest("div .btn-group").find("button").text("Anulado");
 	}
 }
 

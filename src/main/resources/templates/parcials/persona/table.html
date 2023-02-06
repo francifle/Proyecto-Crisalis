@@ -1,4 +1,4 @@
-<div class="container tablaProducto">
+<div class="tablaProducto">
 	<div class="table-wrapper">
 		<div class="table-title">
 			<div class="row">
@@ -24,6 +24,7 @@
 					</span></th>
 					<th>Nombre y apellido</th>
 					<th>DNI</th>
+					<th>Estado</th>
 					<th>Accion</th>
 				</tr>
 			</thead>
@@ -35,6 +36,22 @@
 					</span></td>
 					<td th:text="${persona.getNombreCompleto()}"></td>
 					<td th:text="${persona.getDni()}" class="dni"></td>
+					<td>
+						<div class="btn-group">
+							<button
+								class="btn btn-secondary btn-sm dropdown-toggle dropdownEstado"
+								type="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">Activado</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item changeEstado" href="#"
+									th:if="${persona.getEstado()}">Anular</a> <a
+									class="dropdown-item changeEstado" href="#"
+									th:if="${!persona.getEstado()}">Activar</a>
+								<input th:value="${persona.getId()}" type="hidden"
+									name="personaId">
+							</div>
+						</div>
+					</td>
 					<td><a th:href="@{#editEmployeeModal}+${persona.getId()}"
 						class="edit" data-toggle="modal"><i class="material-icons"
 							 title="Edit">&#xE254;</i></a> <a
@@ -54,4 +71,5 @@
 	<div th:replace="@{parcials/persona/save_modal}"></div>
 	<!-- Event Modal HTML -->
 	<div th:replace="@{parcials/persona/sin_datos_modal}"></div>
+	<div th:replace="@{parcials/persona/check_empresa}"></div>
 </div>

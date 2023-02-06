@@ -29,5 +29,9 @@ public class UtilsConstants {
 	public static final Boolean ESTADO_ACTIVO = Boolean.TRUE;
 	
 	public static final Boolean ESTADO_INACTIVO = Boolean.FALSE;
+	
+	public static final String PEDIDO_EMPRESA = "Pedido a Terceros";
+
+	public static final String PEDIDO_PERSONA = "Pedido Particular";
 
 }

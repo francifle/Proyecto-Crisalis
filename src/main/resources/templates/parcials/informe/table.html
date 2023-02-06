@@ -1,0 +1,41 @@
+<div class="tablaProducto">
+	<div class="table-wrapper">
+		<div class="table-title">
+			<div class="row">
+				<div class="col-sm-6">
+					<h2>
+						Informe de <b>Venta de Clientes</b>
+					</h2>
+				</div>
+			</div>
+		</div>
+		<table id="example" class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th style="width: 40%">Cliente</th>
+					<th>Tipo de Pedido</th>
+					<th>Total Importes</th>
+					<th>Total Descuentos</th>
+					<th>Detalle</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="i: ${informe}">
+					<td th:text="${i.get('cliente').asText()}"></td>
+					<td th:text="${i.get('tipo').asText()}"></td>
+					<td th:text="${i.get('total_importe').asDouble()}"></td>
+					<td th:text="${i.get('total_descuento').asDouble()}"></td>
+					<td><a href="#DetalleInf"
+						class="btn btn-outline-secondary btn-sm detalleBtn"
+						data-toggle="modal">Ver más</a><input
+						th:value="${i.get('detalles').asText()}" type="hidden"
+						name="detalleInf"><input
+						th:value="${i.get('cliente').asText()}" type="hidden"
+						name="clienteInf"></td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- Sin Datos Modal HTML -->
+		<div th:replace="@{parcials/informe/informe_modal}"></div>
+	</div>
+</div>

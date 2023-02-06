@@ -1,7 +1,7 @@
 <div th:id="@{deleteEmployeeModal}+${persona.getId()}" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="/persona/delete" method="POST">
+      <form action="/persona/delete" method="POST" class="asd">
         <div class="modal-header">
           <h4 class="modal-title">Borrar <b th:text="${persona.getNombreCompleto()}"></b></h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -12,7 +12,7 @@
         </div>
         <div class="modal-footer">
           <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-          <input type="submit" class="btn btn-danger" value="Borrar">
+          <input type="button" class="btn btn-danger btn-delete-persona" value="Borrar">
           <input type="hidden" name="personaId" th:value="${persona.getId()}">
         </div>
       </form>

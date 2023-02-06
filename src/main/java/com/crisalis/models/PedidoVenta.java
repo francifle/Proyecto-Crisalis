@@ -5,13 +5,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.crisalis.constants.UtilsConstants;
-import com.crisalis.repositories.PersonaRepository;
-import com.crisalis.services.PersonaService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,7 +38,7 @@ public class PedidoVenta extends GenericModel {
 	@Column(name = "estado", nullable = false)
 	private Boolean estado;
 
-	@ManyToMany
+	@OneToMany
 	private Set<OrdenVenta> ordenes;
 
 	public String getNombre() {
@@ -120,17 +118,4 @@ public class PedidoVenta extends GenericModel {
 	public Set<OrdenVenta> getOrdenesServicio() {
 		return getOrdenesByTipo(UtilsConstants.TIPO_SERVICIO);
 	}
-
-	/*public Long getPersonaId() {
-		String personaNombre = getCliente().split("//")[0].trim();
-		PersonaRepository personaRepository = null;
-		PersonaService personaService = new PersonaService(personaRepository);
-		for (Persona p : personaService.getAllPersonas()) {
-			if (p.getNombreCompleto().equals(personaNombre)) {
-				return p.getId();
-			}
-		}
-		return 0L;
-	}*/
-
 }

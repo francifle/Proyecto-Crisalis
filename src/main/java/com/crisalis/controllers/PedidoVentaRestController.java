@@ -56,12 +56,12 @@ public class PedidoVentaRestController {
 		this.servicioService = servicioService;
 		this.pedidoService = pedidoService;
 	}
-	
+
 	@GetMapping(value = "getPedidoVenta/{id}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public PedidoVenta getPedidoVenta(@PathVariable Long id) {
 		return pedidoVentaService.findPedidoVentaByID(id);
 	}
-	
+
 	@GetMapping(value = "changeEstado/{id}")
 	public PedidoVenta updateEstado(@PathVariable Long id) {
 		PedidoVenta pedidoVenta = pedidoVentaService.findPedidoVentaByID(id);
@@ -75,10 +75,10 @@ public class PedidoVentaRestController {
 		Integer cantidadCargo = 0;
 		String[] ids = idParam.split("-");
 		String[] cargos = ids[2].split(",");
-		Pedido pedido = null;	
+		Pedido pedido = null;
 		if (StringUtils.isNumeric(ids[0])) {
 			pedido = pedidoService.findPedidoByID(Long.valueOf(ids[0]));
-		}else {
+		} else {
 			pedido = pedidoService.findPedidoByNombre(ids[0]);
 		}
 		if (cargos.length == 3) {
@@ -94,7 +94,7 @@ public class PedidoVentaRestController {
 			Double importe = pedidoProducto.getPrecioTotalProducto(cantidadCargo);
 			map.put("importe", importe.toString());
 			map.put("descuento", checkDescuentoByPersona(persona.getNombreCompleto(), importe));
-		} else {
+		} else if (pedido.getTipo().equals(UtilsConstants.TIPO_SERVICIO)) {
 			Servicio pedidoServicio = servicioService.findServicioByPedidoID(pedido.getId());
 			pedidoServicio = setNewImpuestos(pedidoServicio, cargos);
 			map.put("importe", pedidoServicio.getPrecioTotalServicio(cantidadCargo).toString());
@@ -134,15 +134,14 @@ public class PedidoVentaRestController {
 	private String checkDescuentoByPersona(String persona, Double importe) {
 		ArrayList<PedidoVenta> listaPedidos = pedidoVentaService.getAllPedidoVentas();
 		for (PedidoVenta p : listaPedidos) {
-			if(p.getCliente().contains(persona) && p.getEstado() && !p.getOrdenesServicio().isEmpty()) {
-				//System.out.println(p.getEstado());
+			if (p.getCliente().contains(persona) && p.getEstado() && !p.getOrdenesServicio().isEmpty()) {
+				// System.out.println(p.getEstado());
 				Double value = importe * UtilsConstants.DESC_BENEFICIO;
 				return String.valueOf(Math.round(value * 100.0) / 100.0);
 			}
 		}
-	
-		
+
 		return "0";
 	}
-	
+
 }

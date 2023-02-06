@@ -2,7 +2,6 @@ package com.crisalis.controllers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.crisalis.models.Empresa;
-import com.crisalis.models.OrdenVenta;
-import com.crisalis.models.PedidoVenta;
 import com.crisalis.models.Persona;
 import com.crisalis.services.EmpresaService;
 import com.crisalis.services.PersonaService;
@@ -37,7 +34,7 @@ public class EmpresaController {
 		this.personaService = personaService;
 	}
 	
-	@PostMapping(value = "save")
+	@PostMapping(value = "save") //Se obtienen los datos mediante los parametros del modelo Empresa
 	public String saveEmpresa(HttpServletRequest req, HttpServletResponse resp) throws ParseException {
 		String fecha = req.getParameter("fecha");
 		String razonsocial = req.getParameter("razonsocial");
@@ -61,6 +58,7 @@ public class EmpresaController {
 	}
 	
 	@PostMapping(value = "delete")
+	//Se realiza un borrado
 	public String deleteEmpresa(HttpServletRequest req, HttpServletResponse resp) throws ParseException {
 		String id = req.getParameter("empresaId");
 		this.empresaService.deleteEmpresaByID(Long.valueOf(id));

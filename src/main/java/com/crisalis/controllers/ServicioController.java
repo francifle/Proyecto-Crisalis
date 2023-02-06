@@ -77,12 +77,7 @@ public class ServicioController {
 		String id = req.getParameter("servicioId");
 		String fecha = req.getParameter("fecha");
 		String precio = req.getParameter("precio");
-		String[] select = req.getParameterValues("select");
 		Set<Impuesto> impuestos = new HashSet<>();
-		for (int i = 0; i < select.length; i++) {
-			Long impuestoId = Long.valueOf(Arrays.asList(select).get(i));
-			impuestos.add(impuestoService.findImpuestoByID(impuestoId));
-		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 		Date date = sdf.parse(fecha + " 00:00:00");
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime());

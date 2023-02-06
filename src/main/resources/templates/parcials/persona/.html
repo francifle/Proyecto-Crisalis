@@ -1,0 +1,33 @@
+<div th:id="@{ordenModal}+${pedido.getId()}" class="modal fade">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		  <div class="modal-header m-0">
+			<h4 class="modal-title" th:text="${pedido.getNombre()}"></h4>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  </div>
+		  <div class="modal-body">
+		  <p class="mb-3">Cliente: <b th:text="${pedido.getCliente()}"></b></p>
+			<div class="fixed-top collapse show wrapper">
+				<ul class="list-group">
+				<li class="list-group-item"><h6 class="m-0"><b>Productos vendidos</b></h6></li>
+				  <li class="list-group-item" th:each="orden : ${pedido.getOrdenesProducto()}" th:text="${orden.getDetalles()}"></li>
+				</ul>
+			</div>
+			<div class="fixed-top collapse show wrapper">
+				<ul class="list-group">
+				<li class="list-group-item"><h6 class="m-0"><b>Servicios contratados</b></h6></li>
+				  <li class="list-group-item" th:each="orden : ${pedido.getOrdenesServicio()}" th:text="${orden.getDetalles()}"></li>
+				</ul>
+			</div>
+			<div>
+				<p class="mb-1">Importe total: <b th:text="${pedido.getImporteTotal()}"></b></p>
+				<p class="mb-1">Descuento total: <b th:text="${pedido.getTotalDescuentos()}"></b></p>
+				<p>Importe Final: <b th:text="${pedido.getImporteFinal()}"></b></p>	
+			</div>
+		  </div>
+		  <div class="modal-footer">
+			<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+		  </div>	
+	  </div>
+	</div>
+  </div>

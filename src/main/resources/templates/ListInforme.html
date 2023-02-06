@@ -7,6 +7,7 @@
   <title>Crisalis</title>
   <style th:replace="@{parcials/admin_styles}"></style>
   <link rel="stylesheet" th:href="@{../assets/css/crud_table.css}">
+  <link rel="stylesheet" th:href="@{../assets/css/select.css}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" th:href="@{../assets/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
@@ -38,7 +39,7 @@
     <!-- Content Header (Page header) -->
     <section class="content">
         <div class="">
-          <div th:replace="@{parcials/persona/table}"></div>
+          <div th:replace="@{parcials/informe/table}"></div>
         </div>
       <!-- /.row -->
     </section>
@@ -57,13 +58,12 @@
     <script defer th:src="@{../assets/AdminLTE/plugins/datatables/jquery.dataTables.js}"></script>
     <script defer th:src="@{../assets/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
     <script defer th:src="@{../assets/js/datatable.js}"></script>
-    <script defer th:src="@{../assets/js/formatt.js}"></script>
     <!--<script defer th:src="@{../assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
     <script defer th:src="@{../assets/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js}"></script>
     <script defer th:src="@{../assets/js/datepicker.js}"></script>-->
     <script defer th:src="@{../assets/js/onlynumber.js}"></script>
-    <script defer th:src="@{../assets/js/delete_multiple.js}"></script>
+    <script defer th:src="@{../assets/js/delete_multiple.js}"></script>    
     <script defer th:src="@{../assets/js/modal_event.js}"></script>
-    <script defer th:src="@{../assets/js/personaEstado.js}"></script>
+    <script defer th:src="@{../assets/js/detalle_modal.js}"></script>
 </body>
 </html>
